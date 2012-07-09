@@ -11,6 +11,8 @@ app_root = os.path.dirname(__file__)
 templates_root = os.path.join(app_root, 'templates')
 render = web.template.render(templates_root)
 
+sys.path.append(app_root)
+
 import controller.route
 
 class Hello:
