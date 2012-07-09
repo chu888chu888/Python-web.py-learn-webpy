@@ -16,6 +16,8 @@ class route:
         print "className = %s;" % className
         try:
             print locals()
+            mod = locals()['app.controller']
+            print mod
         except ImportError:
             print 'import error'
         return render.hello()
