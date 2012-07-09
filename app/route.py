@@ -15,9 +15,7 @@ class route:
             mod = __import__('app')
             print mod
             print dir(mod)
-            mod = __import__('controller')
-            print mod
-            print dir(mod)
+            print mod.controller
         except ImportError:
             print 'import error'
         return render.hello()
