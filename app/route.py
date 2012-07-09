@@ -1,4 +1,4 @@
-import web
+import web,os
 
 app_root = os.path.dirname(__file__)
 templates_root = os.path.join(app_root, 'template')
