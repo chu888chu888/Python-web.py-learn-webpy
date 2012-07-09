@@ -14,7 +14,7 @@ class route:
         try:
             mod = __import__(modPath)
             print mod
-            print mod.__dir__
+            print dir(mod)
             c = getattr(mod,className)
             obj = c()
             print obj
