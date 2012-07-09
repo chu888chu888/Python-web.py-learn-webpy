@@ -4,15 +4,16 @@ import sae
 import web
         
 urls = (
-    '/', 'Hello'
+    '/(.*)', 'Hello'
 )
 
 app_root = os.path.dirname(__file__)
 templates_root = os.path.join(app_root, 'templates')
 render = web.template.render(templates_root)
 
-class Hello:        
-    def GET(self):
+class Hello:
+    def GET(self,path):
+        print path
         return render.hello()
 
 app = web.application(urls, globals()).wsgifunc()
