@@ -9,4 +9,6 @@ class route:
         print "path is %s ;"%path
         c = 'controller.' + path.replace('/','.');
         print "c = %s ;" % c
+        mod = __import__(c)
+        print mod
         return render.hello()
