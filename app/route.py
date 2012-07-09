@@ -12,7 +12,8 @@ class route:
         className = modPath[ modPath.rfind('.')+1 : ]
         print "className = %s;" % className
         try:
-            mod = import app.controller
+            print local()
+            modApp = import app.controller
             print mod
             print dir(mod)
             c = getattr(mod,className)
