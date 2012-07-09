@@ -12,7 +12,7 @@ class route:
         className = modPath[ modPath.rfind('.')+1 : ]
         print "className = %s;" % className
         try:
-            mod = __import__('app.controller.user',fromlist=["*"])
+            mod = __import__('app.controller.user.user',fromlist=["*"])
             print mod
             print dir(mod)
         except ImportError:
