@@ -5,7 +5,7 @@ urls = (
     '/(.*)', 'app.route.route'
 )
 
-import app.route
+#import app.route
 
 app = web.application(urls, globals()).wsgifunc()
 
