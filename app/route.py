@@ -15,9 +15,9 @@ class route:
             mod = __import__('app')
             print mod
             print dir(mod)
-            c = getattr(mod,className)
-            obj = c()
-            print obj
+            mod = __import__('controller')
+            print mod
+            print dir(mod)
         except ImportError:
             print 'import error'
         return render.hello()
