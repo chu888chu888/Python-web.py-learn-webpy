@@ -12,7 +12,7 @@ class route:
         className = modPath[ modPath.rfind('.')+1 : ]
         print "className = %s;" % className
         try:
-            print local()
+            print locals()
         except ImportError:
             print 'import error'
         return render.hello()
