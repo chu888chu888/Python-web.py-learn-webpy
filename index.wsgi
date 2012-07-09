@@ -13,7 +13,7 @@ render = web.template.render(templates_root)
 
 class Hello:
     def GET(self,path):
-        print "path is %s"%path
+        print "path is %s ;"%path
         return render.hello()
 
 app = web.application(urls, globals()).wsgifunc()
