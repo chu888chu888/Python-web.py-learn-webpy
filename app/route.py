@@ -13,12 +13,6 @@ class route:
         print "className = %s;" % className
         try:
             print local()
-            modApp = import app.controller
-            print mod
-            print dir(mod)
-            c = getattr(mod,className)
-            obj = c()
-            print obj
         except ImportError:
             print 'import error'
         return render.hello()
