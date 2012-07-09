@@ -7,7 +7,7 @@ render = web.template.render(templates_root)
 class route:
     def GET(self,path):
         print "path is %s ;"%path
-        c = 'controller.' + path.replace('/','.');
+        c = 'app.controller.' + path.replace('/','.');
         print "c = %s ;" % c
         try:
             mod = __import__(c)
