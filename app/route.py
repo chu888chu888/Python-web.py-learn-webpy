@@ -12,7 +12,7 @@ class route:
         className = modPath[ modPath.rfind('.')+1 : ]
         print "className = %s;" % className
         try:
-            mod = __import__(modPath)
+            mod = import modPath
             print mod
             print dir(mod)
             c = getattr(mod,className)
