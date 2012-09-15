@@ -1,16 +1,18 @@
 # coding=utf-8
 
-class Controller:
+class Controller(object):
 	def __init__(self):
 		self.m_variableDict = {}
 		self.m_title = u"未命令网页"
 		self.m_templatePath=''
 	def run(self,render,path,arrPath):
-		self.process()
 		self.m_path = path
 		self.setVariable('path',path)
 		self.m_arrPath = arrPath
 		self.setVariable('arrPath',arrPath);
+		
+		self.process()
+		
 		return self.render(render)
 	
 	def process(self):
