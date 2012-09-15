@@ -1,23 +1,59 @@
-import web,os
+import web,os,sys
 
 app_root = os.path.dirname(__file__)
+sys.path.append(app_root)
 templates_root = os.path.join(app_root, 'template')
 render = web.template.render(templates_root)
 
+import controller.NotFound
+import controller.Index
+
 class route:
+    def run(self,path):
+        if not path:
+            arrPath = []
+        else:
+            arrPath = path.split('/')
+        controller = self.createController(arrPath)
+        return controller.run(render,path,arrPath)
+        
     def GET(self,path):
-        print "path is %s ;"%path
-        modPath = 'app.controller.' + path.replace('/','.');
-        print "modPath = %s ;" % modPath
-        className = modPath[ modPath.rfind('.')+1 : ]
-        print "className = %s;" % className
+        return self.run(path)
+        
+    def POST(self,path):
+        return self.run(path)
+        
+    def createController(self,arrPath):
+        print arrPath
+        if not arrPath :
+            controller = self.createIndexController()
+        else:
+            controllerClass = self.importModule(arrPath)
+            if controllerClass != None:
+                controller = controllerClass()
+            else:
+                controller = self.createNotFoundController(arrPath)
+        return controller
+        
+    def importModule(self,arrPath):
+        modPath = 'app.controller.' + ".".join(arrPath)
         try:
-            mod = __import__('app.controller.user',fromlist=["*"])
-            print mod
-            print dir(mod)
-            c = getattr(mod,'user')
-            obj = c()
-            print obj
-        except ImportError:
-            print 'import error'
-        return render.hello()
+            mod = __import__(modPath,fromlist=["*"])
+        except ImportError,e:
+            print 'ImportError'
+            return None
+        
+        className = arrPath[-1]
+        try:
+            c = getattr(mod,className)
+        except AttributeError,e:
+            print 'AttributeError',className
+            return None
+        return c
+        
+    def createNotFoundController(self,arrPath):
+        c = controller.NotFound.NotFound()
+        return c
+        
+    def createIndexController(self):
+        return controller.Index.Index()
