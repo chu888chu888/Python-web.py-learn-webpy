@@ -1,16 +1,22 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
+
+import PathInvalid
 
 class Controller(object):
 	def __init__(self):
 		self.m_variableDict = {}
 		self.m_title = u"未命令网页"
-		self.m_templatePath=''
-	def run(self,render,path,arrPath):
-		self.m_path = path
-		self.setVariable('path',path)
-		self.m_arrPath = arrPath
-		self.setVariable('arrPath',arrPath);
+		self.m_templatePath = ''
 		
+		prefix = 'app.controller.'
+		modulePath = self.__module__
+		if not modulePath.startswith(prefix):
+			raise PathInvalid.PathInvalid(self.__module__)
+		self.m_path = modulePath[ len(prefix) : ]
+		
+		self.setVariable('path',self.m_path)
+		
+	def run(self,render):
 		self.process()
 		
 		return self.render(render)
@@ -22,7 +28,7 @@ class Controller(object):
 		if self.m_templatePath:
 			arrTemplatePath = self.m_templatePath.split('/')
 		else:
-			arrTemplatePath = self.m_arrPath
+			arrTemplatePath = self.m_path.split('.')
 		c=render
 		for i in arrTemplatePath:
 			c = getattr(c,i)

@@ -1,6 +1,4 @@
-import controller.base.Controller
+from controller.base.Controller import Controller
 
-class NotFound(controller.base.Controller.Controller):
-	def __init__(self):
-		super(NotFound,self).__init__()
-		self.m_templatePath = 'NotFound'
+class NotFound(Controller):
+	pass
