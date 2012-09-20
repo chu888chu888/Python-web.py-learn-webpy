@@ -1,0 +1,25 @@
+$def with(varDict)
+
+<div>
+	$if varDict.has_key('result'):
+		$if varDict['result']:
+			<div>成功</div>
+		$else:
+			<div>失败</div>
+</div>
+创建数据库
+<form action="/db/SetupDb?input=form" method="post">
+	<div>
+		root密码：<input name="rootPassword" />
+	</div>
+	<div>
+		新用户名：<input name="dbUserName" />
+	</div>
+	<div>
+		新用户密码：<input name="dbUserPassword" />
+	</div>
+	<div>
+		数据库名：<input name="dbname" />
+	</div>
+	<input type="submit" />
+</form>

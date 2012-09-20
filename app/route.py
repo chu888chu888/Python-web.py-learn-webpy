@@ -1,5 +1,9 @@
 import web,os,sys
 
+if sys.getdefaultencoding() != 'utf-8':
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
 app_root = os.path.dirname(__file__)
 sys.path.append(app_root)
 templates_root = os.path.join(app_root, 'template')
