@@ -13,7 +13,8 @@ class DbCreator(object):
 				user=sae.const.MYSQL_USER,
 				pw=sae.const.MYSQL_PASS,
 				host=sae.const.MYSQL_HOST,
-				port=sae.const.MYSQL_PORT
+				port=sae.const.MYSQL_PORT,
+				db=sae.const.MYSQL_DB
 			)
 		else:
 			cf = ConfigParser.ConfigParser()
