@@ -2,6 +2,9 @@ import ConfigParser
 import web
 import os
 
+if os.environ.has_key('SERVER_SOFTWARE'):
+	import sae.const
+
 class DbCreator(object):
 	def create(self):
 		if os.environ.has_key('SERVER_SOFTWARE'):
