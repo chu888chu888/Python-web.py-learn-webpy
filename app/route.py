@@ -19,7 +19,7 @@ class route:
         else:
             arrPath = path.split('/')
         controller = self.createController(arrPath)
-        controller.setVariable('urlPath',path)
+        controller.setUrlPath(path)
         return controller.run(render)
         
     def GET(self,path):
@@ -45,6 +45,7 @@ class route:
             mod = __import__(modPath,fromlist=["*"])
         except ImportError as e:
             print 'ImportError'
+            print e
             return None
         
         className = arrPath[-1]

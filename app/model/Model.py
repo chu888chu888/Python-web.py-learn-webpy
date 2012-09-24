@@ -1,7 +1,7 @@
 import db.DbCreator
 import hashlib
 
-class Base(object):
+class Model(object):
 	def __init__(self,sTableName):
 		self.m_tableName = sTableName
 		DbCreator = db.DbCreator.DbCreator()

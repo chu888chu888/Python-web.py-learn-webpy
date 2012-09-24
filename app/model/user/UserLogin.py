@@ -1,5 +1,5 @@
-import model.Base
+import model.Model
 
-class UserLogin(model.Base.Base):
+class UserLogin(model.Model.Model):
 	def __init__(self):
 		super(UserLogin,self).__init__('logininfo')

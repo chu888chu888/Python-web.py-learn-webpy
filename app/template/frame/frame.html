@@ -1,12 +1,12 @@
-$def with(body,controller)
+$def with(varDict)
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="icon" href="/static/breaking.ico" mce_href="/static/breaking.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/static/breaking.ico" mce_href="/static/breaking.ico" type="image/x-icon">
-    <title>$controller.title()</title>
+    <title>$varDict['title']</title>
   </head>
   <body>
-  $:body
+  $:varDict['body']
   </body>
 </html>
