@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import PathInvalid
-import view.View
+import view.FrameView
 
 class Controller(object):
 	def __init__(self):
@@ -11,18 +11,25 @@ class Controller(object):
 			raise PathInvalid.PathInvalid(self.__module__)
 		self.m_path = modulePath[ len(prefix) : ]
 		
+		aView = view.FrameView.FrameView()
+		self.setView(aView)
+		
 		self.view().setVariable('path',self.m_path)
-	def run(self,render):
+		self.view().setTemplatePath(self.m_path.replace('.','/'))
+		self.view().setFrameTplPath('frame/frame')
+		self.view().setTitle( u'无标题' )
+	def run(self,renderObject):
 		self.process()
 		
-		return self.view().render(render)
+		return self.view().render(renderObject)
 	
 	def process(self):
 		pass
 	
+	def setView(self,aView):
+		self.m_view = aView
+		
 	def view(self):
-		if not hasattr(self,'m_view'):
-			self.m_view = view.View.View(self.m_path)
 		return self.m_view
 	
 	def setUrlPath(self,urlPath):

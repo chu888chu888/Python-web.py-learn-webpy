@@ -1,25 +1,16 @@
 # -*- coding: utf-8 -*-
 
 class View(object):
-	def __init__(self,strPath):
-		self.m_strPath = strPath
+	def __init__(self):
 		self.m_templatePath = ''
 		self.m_variableDict = dict()
 		
-		self.setTitle(u"未命名网页")
-	
 	def render(self,render):
-		if self.m_templatePath:
-			arrTemplatePath = self.m_templatePath.split('/')
-		else:
-			arrTemplatePath = self.m_strPath.split('.')
-		c=render
-		for i in arrTemplatePath:
-			c = getattr(c,i)
+		r = render.frender(self.m_templatePath)
+		return r(self.variableDict())
 		
-		body = c( self.variableDict() )
-		self.setVariable('body',body)
-		return render.frame.frame(self.variableDict())
+	def setTemplatePath(self,strTemplatePath):
+		self.m_templatePath = strTemplatePath
 		
 	def setVariable(self,key,value):
 		self.m_variableDict[key] = value

@@ -6,11 +6,10 @@ if sys.getdefaultencoding() != 'utf-8':
 
 app_root = os.path.dirname(__file__)
 sys.path.append(app_root)
-templates_root = os.path.join(app_root, 'template')
-render = web.template.render(templates_root)
 
 import controller.NotFound
 import controller.Index
+import render.Render
 
 class route:
     def run(self,path):
@@ -20,7 +19,9 @@ class route:
             arrPath = path.split('/')
         controller = self.createController(arrPath)
         controller.setUrlPath(path)
-        return controller.run(render)
+        
+        renderObject = render.Render.Render()
+        return controller.run(renderObject)
         
     def GET(self,path):
         return self.run(path)
