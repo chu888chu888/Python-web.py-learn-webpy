@@ -1,5 +1,5 @@
-from controller.base.Controller import Controller
+from controller.base.FrameController import FrameController
 
-class NotFound(Controller):
+class NotFound(FrameController):
 	def process(self):
 		self.view().setVariable('urlPath',self.m_urlPath)

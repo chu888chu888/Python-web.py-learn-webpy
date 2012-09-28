@@ -1,4 +1,4 @@
-from controller.base.Controller import Controller
+from controller.base.FrameController import FrameController
 
-class Register(Controller):
+class Register(FrameController):
     pass

@@ -1,10 +1,10 @@
 # coding=utf-8
-from controller.base.Controller import Controller
+from controller.base.FrameController import FrameController
 import model.user.UserLogin
 import web
 from _mysql_exceptions import IntegrityError
 
-class RegisterResult(Controller):
+class RegisterResult(FrameController):
     def process(self):
         i = web.input()
         

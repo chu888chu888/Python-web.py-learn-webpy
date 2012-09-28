@@ -1,9 +1,9 @@
 # coding=utf-8
-from controller.base.Controller import Controller
+from controller.base.FrameController import FrameController
 import web
 import model.user.UserLogin
 
-class LoginResult(Controller):
+class LoginResult(FrameController):
 	def process(self):
 		i = web.input()
 		
