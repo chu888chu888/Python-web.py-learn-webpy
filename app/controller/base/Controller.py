@@ -2,7 +2,6 @@
 
 import PathInvalid
 
-
 class Controller(object):
 	def __init__(self):
 		prefix = 'app.controller.'
@@ -15,12 +14,14 @@ class Controller(object):
 		
 	def run(self,renderObject):
 		self.process()
+		return self.render(renderObject)
 		
-		return self.view().render(renderObject)
-	
 	def process(self):
 		pass
-	
+		
+	def render(self,renderObject):
+		return self.view().rootView().render(renderObject)
+		
 	def setView(self,aView):
 		self.m_view = aView
 		

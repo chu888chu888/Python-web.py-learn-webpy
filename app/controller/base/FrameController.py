@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import Controller
-import view.FrameView
+import view.View
 
 class FrameController(Controller.Controller):
 	def __init__(self):
 		super(FrameController,self).__init__()
 		
-		aView = view.FrameView.FrameView()
-		self.setView(aView)
+		aBodyView = view.View.View()
+		aBodyView.setVariable('path',self.m_path)
+		aBodyView.setTemplatePath(self.m_path.replace('.','/'))
+		self.setView(aBodyView)
 		
-		self.view().setVariable('path',self.m_path)
-		self.view().setTemplatePath(self.m_path.replace('.','/'))
-		self.view().setFrameTplPath('frame/frame')
-		self.view().setTitle( u'无标题' )
+		aFrameView = view.View.View()
+		aFrameView.setTemplatePath('frame/frame')
+		aFrameView.setVariable('title',u'无标题')
+		aFrameView.addSubView('body',aBodyView)
