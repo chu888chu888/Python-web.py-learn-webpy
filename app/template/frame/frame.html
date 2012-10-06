@@ -5,8 +5,10 @@ $def with(varDict)
     <link rel="icon" href="/static/breaking.ico" mce_href="/static/breaking.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/static/breaking.ico" mce_href="/static/breaking.ico" type="image/x-icon">
     <title>$varDict['title']</title>
+    $for styleFile in varDict['styles']
+        <link rel="stylesheet" type="text/css" href="static/$styleFile">
   </head>
   <body>
-  $:varDict['body']
+  $:varDict['temp']['body']
   </body>
 </html>

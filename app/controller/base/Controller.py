@@ -12,6 +12,8 @@ class Controller(object):
 		
 		self.m_view = None
 		
+		self.m_variableDict = dict()
+		
 	def run(self,renderObject):
 		self.process()
 		return self.render(renderObject)
@@ -20,7 +22,7 @@ class Controller(object):
 		pass
 		
 	def render(self,renderObject):
-		return self.view().rootView().render(renderObject)
+		return self.view().rootView().render(renderObject,self.m_variableDict)
 		
 	def setView(self,aView):
 		self.m_view = aView
@@ -30,3 +32,6 @@ class Controller(object):
 	
 	def setUrlPath(self,urlPath):
 		self.m_urlPath = urlPath
+		
+	def setVariable(self,key,value):
+		self.m_variableDict[key] = value

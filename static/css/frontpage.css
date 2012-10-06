@@ -1,0 +1,14 @@
+.frontpage{
+	margin: auto;
+	width: 800px;
+	margin-top: 30px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #DDD;
+	background: #F2F5F7;
+	padding:2em;
+}
+body{
+	background:#C2DDF9;
+}

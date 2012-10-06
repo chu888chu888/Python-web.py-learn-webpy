@@ -3,31 +3,30 @@
 class View(object):
 	def __init__(self):
 		self.m_templatePath = ''
-		self.m_variableDict = dict()
 		self.m_dictSubView = dict()
 		self.m_parentView = None
 		
 		# a cache variable
 		self.m_rootView = None
 		
-	def render(self,render):
-		varDict = dict(self.variableDict())
-		
+	def render(self,render,varDict):
+		subViewRenderResult = dict()
 		for name in self.m_dictSubView:
 			aSubView = self.m_dictSubView[name]
-			varDict[name] = aSubView.render(render)
+			subViewRenderResult[name] = aSubView.render(render,varDict)
 		
 		r = render.frender(self.m_templatePath)
-		return r( varDict )
+		
+		varDict['temp'] = dict()
+		for name in subViewRenderResult:
+			varDict['temp'][name] = subViewRenderResult[name]
+		ret = r( varDict )
+		del(varDict['temp'])
+		
+		return ret
 		
 	def setTemplatePath(self,strTemplatePath):
 		self.m_templatePath = strTemplatePath
-		
-	def setVariable(self,key,value):
-		self.m_variableDict[key] = value
-		
-	def variableDict(self):
-		return self.m_variableDict
 		
 	def addSubView(self,strName,aView):
 		self.m_dictSubView[strName] = aView
@@ -35,9 +34,6 @@ class View(object):
 		
 	def subView(self,strName):
 		return self.m_dictSubView[strName]
-		
-	def subViewIterator(self):
-		pass
 		
 	def setParentView(self,aView):
 		self.m_parentView = aView
