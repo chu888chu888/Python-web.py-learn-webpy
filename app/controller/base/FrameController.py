@@ -23,3 +23,4 @@ class FrameController(Controller.Controller):
 		aFrameView.addSubView('body',aPageView)
 		
 		self.setVariable('styles',list())
+		self.setVariable('js',list())

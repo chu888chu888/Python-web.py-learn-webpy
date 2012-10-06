@@ -1,5 +1,57 @@
 $def with(varDict)
-$varDict['styles'].append('css/frontpage.css')
+
+$varDict['styles'].append('frontpage.css')
+$varDict['js'].append('frontpage.js')
+
 <div class="frontpage">
-$:varDict['temp']['body']
+	<div class="top_block frontpage_block">
+		<div class="top_img">
+			<div class="top_title_block">
+				<span class="top_title">欢迎来到 JDMD Online Judge</span>
+			</div>
+		</div>
+	</div>
+	<div class="navigation frontpage_block frontpage_content_block">
+		<div class="nav_block index">
+			<div class="nav_title">
+				<span>首页</span>
+			</div>
+			<div class="nav_content">
+				<a href='/'>首页</a>
+			</div>
+		</div>
+		<div class="nav_block user">
+			<div class="nav_title">
+				<span>用户</span>
+			</div>
+			<div class="nav_content">
+				<a href='/user/Register'>注册</a>
+				<a href='/user/Login'>登录</a>
+			</div>
+		</div>
+		<div class="nav_block practice">
+			<div class="nav_title">
+				<span>练习区</span>
+			</div>
+			<div class="nav_content">
+				<a href='#'>题目列表</a>
+				<a href='#'>排名</a>
+			</div>
+		</div>
+		<div class="nav_block contest">
+			<div class="nav_title">
+				<span>比赛区</span>
+			</div>
+			<div class="nav_content">
+				<a href='#'>比赛列表</a>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="frontpage_body frontpage_block frontpage_content_block">
+		$:varDict['temp']['body']
+	</div>
+	<div class="frontpage_bottom frontpage_block frontpage_content_block">
+		大连理工大学电子信息与电气工程学部CPF科技协会JDMD工作室
+	</div>
 </div>
