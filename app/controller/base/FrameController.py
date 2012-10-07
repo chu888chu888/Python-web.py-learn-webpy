@@ -2,6 +2,7 @@
 
 import Controller
 import view.View
+import web
 
 class FrameController(Controller.Controller):
 	def __init__(self):
@@ -24,3 +25,10 @@ class FrameController(Controller.Controller):
 		
 		self.setVariable('styles',list())
 		self.setVariable('js',list())
+		
+		# session
+		s = web.config._session
+		uid = -1
+		if hasattr(s,'uid'):
+			uid = s['uid']
+		self.setVariable('uid',uid)

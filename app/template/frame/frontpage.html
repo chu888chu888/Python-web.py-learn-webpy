@@ -25,8 +25,14 @@ $varDict['js'].append('frontpage.js')
 				<span>用户</span>
 			</div>
 			<div class="nav_content">
-				<a href='/user/Register'>注册</a>
-				<a href='/user/Login'>登录</a>
+				$if varDict['uid'] > 0 :
+					<a href="/user/ChangePassword">修改密码</a>
+					<a href="/user/EditUserInfo">修改个人资料</a>
+					<a href="/user/Logout">退出</a>
+				$else:
+					<a href='/user/Register'>注册</a>
+					<a href='/user/Login'>登录</a>
+				<div>$varDict['uid']</div>
 			</div>
 		</div>
 		<div class="nav_block practice">
