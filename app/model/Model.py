@@ -8,7 +8,7 @@ class Model(object):
 		self.m_db = DbCreator.create()
 	
 	def insert(self,dictData):
-		self.m_db.insert(
+		return self.m_db.insert(
 			self.m_tableName,
 			**dictData
 		);

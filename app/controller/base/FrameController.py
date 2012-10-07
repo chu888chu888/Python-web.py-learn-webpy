@@ -3,6 +3,7 @@
 import Controller
 import view.View
 import web
+import model.Model
 
 class FrameController(Controller.Controller):
 	def __init__(self):
@@ -32,3 +33,9 @@ class FrameController(Controller.Controller):
 		if hasattr(s,'uid'):
 			uid = s['uid']
 		self.setVariable('uid',uid)
+		
+		# userinfo
+		mUserInfo = model.Model.Model('userinfo')
+		userinfo = mUserInfo.select({'uid':uid})[0]
+		print userinfo
+		self.setVariable('userinfo',userinfo)
