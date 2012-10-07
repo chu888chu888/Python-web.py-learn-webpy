@@ -1,12 +1,17 @@
 $def with(varDict)
-注册
+
+<h1>注册</h1>
 
 <form action="/user/RegisterResult?xxx=ooo" method="post">
-  <div>
-    登录名:<input name="loginname" />
-  </div>
-  <div>
-    密码:<input name="password" />
-  </div>
+  <table>
+    <tr>
+      <td>登录名</td>
+      <td><input name="loginname" /></td>
+    </tr>
+    <tr>
+      <td>密码</td>
+      <td><input type="password" name="password" /></td>
+    </tr>
+  </table>
   <input type="submit" value="注册" />
 </form>

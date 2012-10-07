@@ -1,7 +1,7 @@
-from controller.base.Controller import Controller
+from controller.base.FrameController import FrameController
 import web
 
-class SetupDb(Controller):
+class SetupDb(FrameController):
 	def process(self):
 		i = web.input()
 		if i:
