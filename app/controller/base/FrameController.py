@@ -37,5 +37,4 @@ class FrameController(Controller.Controller):
 		# userinfo
 		mUserInfo = model.Model.Model('userinfo')
 		userinfo = mUserInfo.select({'uid':uid})[0]
-		print userinfo
 		self.setVariable('userinfo',userinfo)

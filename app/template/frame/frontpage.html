@@ -3,63 +3,65 @@ $def with(varDict)
 $varDict['styles'].append('frontpage.css')
 $varDict['js'].append('frontpage.js')
 
-<div class="frontpage">
-	<div class="top_block frontpage_block">
-		<div class="top_img">
-			<div class="top_title_block">
-				<span class="top_title">欢迎来到 JDMD Online Judge</span>
+<div class="body_block">
+	<div class="frontpage">
+		<div class="top_block frontpage_block">
+			<div class="top_img">
+				<div class="top_title_block">
+					<span class="top_title">欢迎来到 JDMD Online Judge</span>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="navigation frontpage_block frontpage_content_block">
-		<div class="nav_block index">
-			<div class="nav_title">
-				<span>首页</span>
+		<div class="navigation frontpage_block frontpage_content_block">
+			<div class="nav_block index">
+				<div class="nav_title">
+					<span>首页</span>
+				</div>
+				<div class="nav_content">
+					<a href='/'>首页</a>
+				</div>
 			</div>
-			<div class="nav_content">
-				<a href='/'>首页</a>
+			<div class="nav_block user">
+				<div class="nav_title">
+					<span>用户</span>
+				</div>
+				<div class="nav_content">
+					$if varDict['uid'] > 0 :
+						<div>欢迎您 $varDict['userinfo']['nickname']</div>
+						<div>您的email是 $varDict['userinfo']['email']</div>
+						<a href="/user/ChangePassword">修改密码</a>
+						<a href="/user/EditUserInfo">修改个人资料</a>
+						<a href="/user/Logout">退出</a>
+					$else:
+						<a href='/user/Register'>注册</a>
+						<a href='/user/Login'>登录</a>
+					<div>$varDict['uid']</div>
+				</div>
 			</div>
+			<div class="nav_block practice">
+				<div class="nav_title">
+					<span>练习区</span>
+				</div>
+				<div class="nav_content">
+					<a href='#'>题目列表</a>
+					<a href='#'>排名</a>
+				</div>
+			</div>
+			<div class="nav_block contest">
+				<div class="nav_title">
+					<span>比赛区</span>
+				</div>
+				<div class="nav_content">
+					<a href='#'>比赛列表</a>
+				</div>
+			</div>
+			<div class="clear"></div>
 		</div>
-		<div class="nav_block user">
-			<div class="nav_title">
-				<span>用户</span>
-			</div>
-			<div class="nav_content">
-				$if varDict['uid'] > 0 :
-					<div>欢迎您 $varDict['userinfo']['nickname']</div>
-					<div>您的email是 $varDict['userinfo']['email']</div>
-					<a href="/user/ChangePassword">修改密码</a>
-					<a href="/user/EditUserInfo">修改个人资料</a>
-					<a href="/user/Logout">退出</a>
-				$else:
-					<a href='/user/Register'>注册</a>
-					<a href='/user/Login'>登录</a>
-				<div>$varDict['uid']</div>
-			</div>
+		<div class="frontpage_body frontpage_block frontpage_content_block">
+			$:varDict['temp']['body']
 		</div>
-		<div class="nav_block practice">
-			<div class="nav_title">
-				<span>练习区</span>
-			</div>
-			<div class="nav_content">
-				<a href='#'>题目列表</a>
-				<a href='#'>排名</a>
-			</div>
+		<div class="frontpage_bottom frontpage_block frontpage_content_block">
+			大连理工大学电子信息与电气工程学部CPF科技协会JDMD工作室
 		</div>
-		<div class="nav_block contest">
-			<div class="nav_title">
-				<span>比赛区</span>
-			</div>
-			<div class="nav_content">
-				<a href='#'>比赛列表</a>
-			</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<div class="frontpage_body frontpage_block frontpage_content_block">
-		$:varDict['temp']['body']
-	</div>
-	<div class="frontpage_bottom frontpage_block frontpage_content_block">
-		大连理工大学电子信息与电气工程学部CPF科技协会JDMD工作室
 	</div>
 </div>

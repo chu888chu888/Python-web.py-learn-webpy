@@ -1,20 +1,21 @@
-.frontpage{
-	margin: auto;
+body{
+	background:#C2DDF9;
+}
+.body_block{
 	width: 800px;
+	margin: auto;
+}
+.frontpage{
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 	border: 1px solid #DDD;
 	background: #F2F5F7;
-	padding:0 1em;
-}
-body{
-	background:#C2DDF9;
+	padding:1em;
 }
 .frontpage_block{
 	border-radius: 4px;
 	border: 2px solid white;
-	margin-top:10px;
 	margin-bottom:10px;
 }
 .frontpage_content_block{
