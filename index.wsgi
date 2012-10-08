@@ -8,7 +8,7 @@ urls = (
 
 app = web.application(urls, globals())
 
-class MemStore(Store):
+class MemStore(web.session.Store):
     def __init__(self, memcache):
         self.mc = memcache
 
