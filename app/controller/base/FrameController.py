@@ -27,6 +27,9 @@ class FrameController(Controller.Controller):
 		self.setVariable('styles',list())
 		self.setVariable('js',list())
 		
+		self.addPostProcess('user')
+	
+	def ppUser(self):
 		# session
 		s = web.config._session
 		uid = -1
@@ -36,5 +39,5 @@ class FrameController(Controller.Controller):
 		
 		# userinfo
 		mUserInfo = model.Model.Model('userinfo')
-		userinfo = mUserInfo.select({'uid':uid})[0]
-		self.setVariable('userinfo',userinfo)
+		for userinfo in mUserInfo.select({'uid':uid}) :
+			self.setVariable('userinfo',userinfo)

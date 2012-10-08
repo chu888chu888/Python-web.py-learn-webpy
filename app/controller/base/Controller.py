@@ -13,9 +13,15 @@ class Controller(object):
 		self.m_view = None
 		
 		self.m_variableDict = dict()
+		self.m_pplist = list()
 		
 	def run(self,renderObject):
 		self.process()
+		
+		for strPpName in self.m_pplist:
+			func = getattr(self,'pp'+strPpName.capitalize())
+			func()
+		
 		return self.render(renderObject)
 		
 	def process(self):
@@ -35,3 +41,6 @@ class Controller(object):
 		
 	def setVariable(self,key,value):
 		self.m_variableDict[key] = value
+		
+	def addPostProcess(self,strPpName):
+		self.m_pplist.append(strPpName)
