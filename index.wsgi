@@ -8,14 +8,6 @@ urls = (
 
 app = web.application(urls, globals())
 
-session = web.session.Session(
-		app,
-		MemStore(pylibmc.Client()),
-		{'count': 0}
-	)
-web.config._session = session
-application = sae.create_wsgi_app(app.wsgifunc())
-
 class MemStore(Store):
     def __init__(self, memcache):
         self.mc = memcache
@@ -45,3 +37,11 @@ class MemStore(Store):
 
     def cleanup(self, timeout):
         pass
+
+session = web.session.Session(
+		app,
+		MemStore(pylibmc.Client()),
+		{'count': 0}
+	)
+web.config._session = session
+application = sae.create_wsgi_app(app.wsgifunc())
