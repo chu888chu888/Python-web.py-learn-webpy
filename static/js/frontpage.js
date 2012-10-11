@@ -30,8 +30,9 @@ frontpage.getBrowserVersion = function(){
 
 
 frontpage.fuckIE = function(){
-	alert('本网站不支持IE浏览器，请使用chrome或者firefox');
-	window.location="http://www.google.cn/intl/zh-CN/chrome/browser/";
+	if( window.location.pathname != '/FuckIE' ){
+		window.location="/FuckIE";
+	}
 }
 
 frontpage.log = function(text){
