@@ -1,7 +1,7 @@
-from controller.base.FrameController import FrameController
+from controller.base.WebPageController import WebPageController
 import db.DbCreator
 
-class CreateTables(FrameController):
+class CreateTables(WebPageController):
 	def process(self):
 		DbCreator = db.DbCreator.DbCreator()
 		self.m_db = DbCreator.create()

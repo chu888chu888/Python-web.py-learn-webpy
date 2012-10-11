@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import PathInvalid
+import view.View
 
 class Controller(object):
 	def __init__(self):
@@ -10,10 +11,17 @@ class Controller(object):
 			raise PathInvalid.PathInvalid(self.__module__)
 		self.m_path = modulePath[ len(prefix) : ]
 		
+		self.m_renderType = 'frameview'
+		
 		self.m_view = None
 		
 		self.m_variableDict = dict()
 		self.m_pplist = list()
+		
+	def buildView(self):
+		aView = view.View.View()
+		aView.setTemplatePath(self.m_path.replace('.','/'))
+		self.setView(aView)
 		
 	def run(self,renderObject):
 		self.process()
@@ -28,7 +36,21 @@ class Controller(object):
 		pass
 		
 	def render(self,renderObject):
-		return self.view().rootView().render(renderObject,self.m_variableDict)
+		if 'frameview' == self.m_renderType or 'view' == self.m_renderType:
+			if not self.view():
+				self.buildView()
+			if 'frameview' == self.m_renderType:
+				return self.view().rootView().render(
+					renderObject,
+					self.m_variableDict
+				)
+			else:
+				return self.view().render(
+					renderObject,
+					self.m_variableDict
+				)
+		else:
+			return self.m_renderType
 		
 	def setView(self,aView):
 		self.m_view = aView

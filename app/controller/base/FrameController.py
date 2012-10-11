@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import Controller
+import WebPageController
 import view.View
 import web
 import model.Model
 
-class FrameController(Controller.Controller):
+class FrameController(WebPageController.WebPageController):
 	def __init__(self):
 		super(FrameController,self).__init__()
 		
 		self.setVariable('path',self.m_path)
-		self.setVariable('title',u'无标题')
 		
+		self.addPostProcess('user')
+		
+	def buildView(self):
 		aBodyView = view.View.View()
 		aBodyView.setTemplatePath(self.m_path.replace('.','/'))
 		self.setView(aBodyView)
@@ -24,11 +26,6 @@ class FrameController(Controller.Controller):
 		aFrameView.setTemplatePath('frame/frame')
 		aFrameView.addSubView('body',aPageView)
 		
-		self.setVariable('styles',list())
-		self.setVariable('js',list())
-		
-		self.addPostProcess('user')
-	
 	def ppUser(self):
 		# session
 		s = web.config._session
