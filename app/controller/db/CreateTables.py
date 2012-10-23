@@ -19,3 +19,24 @@ class CreateTables(WebPageController):
 			`avatar` varchar(100) , \
 			PRIMARY KEY (`uid`) \
 			)");
+		self.m_db.query("CREATE TABLE IF NOT EXISTS `problem` ( \
+			`pid` int(10) NOT NULL COMMENT '内部id,题号由时间排序得到', \
+			`title` varchar(60) NOT NULL COMMENT '题目标题', \
+			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳', \
+			`time_limit` int(10) NOT NULL COMMENT '单位：ms' , \
+			`memory_limit` int(10) NOT NULL COMMENT '单位：kb' ,\
+			`description` TEXT NOT NULL ,\
+			`input` TEXT NOT NULL,\
+			`output` TEXT NOT NULL,\
+			`sample_input` TEXT NOT NULL,\
+			`sample_output` TEXT NOT NULL,\
+			`hint` TEXT NOT NULL,\
+			`source` varchar(100) NOT NULL,\
+			`authorid` int(10) NOT NULL,\
+			PRIMARY KEY (`pid`) \
+			)");
+		self.m_db.query("CREATE TABLE IF NOT EXISTS `problem_num`(\
+			`pnum` int(10) NOT NULL COMMENT '题号',\
+			`pid` int(10) NOT NULL COMMENT '题目真实id',\
+			PRIMARY KEY (`pnum`) \
+			)");

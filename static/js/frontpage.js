@@ -1,7 +1,6 @@
 window.onload =  function(){
 	var bv = frontpage.getBrowserVersion();
 	var s = bv.split(':');
-	frontpage.log(s);
 	switch(s[0]){
 	case 'IE':
 		frontpage.fuckIE();
@@ -32,11 +31,5 @@ frontpage.getBrowserVersion = function(){
 frontpage.fuckIE = function(){
 	if( window.location.pathname != '/FuckIE' ){
 		window.location="/FuckIE";
-	}
-}
-
-frontpage.log = function(text){
-	if( typeof console == 'object' ){
-		console.log(text);
 	}
 }

@@ -1,0 +1,75 @@
+$def with(varDict)
+
+$varDict['styles'].append('jdmd_widget.css')
+$varDict['js'].append('jquery.js')
+$varDict['js'].append('jdmd_widget.js')
+
+<div>
+	<form action="/problem/AddProblemResult" method="post">
+		<table>
+			<tr>
+				<td>标题</td>
+				<td><input class="jdmd_input" name="title" validate="notempty" /></td>
+			</tr>
+			<tr>
+				<td>time limit</td>
+				<td><input class="jdmd_input" name="time_limit" validate="notempty int" />毫秒(ms)</td>
+			</tr>
+			<tr>
+				<td>memory limit</td>
+				<td><input class="jdmd_input" name="memory_limit" validate="notempty int" />KB</td>
+			</tr>
+			<tr>
+				<td>description</td>
+				<td><textarea name="description" class="jdmd_input" validate="notempty" ></textarea></td>
+			</tr>
+			<tr>
+				<td>input</td>
+				<td><textarea name="input" class="jdmd_input" validate="notempty" ></textarea></td>
+			</tr>
+			<tr>
+				<td>output</td>
+				<td><textarea name="output" class="jdmd_input" validate="notempty" ></textarea></td>
+			</tr>
+			<tr>
+				<td>sample_input</td>
+				<td><textarea name="sample_input" class="jdmd_input" validate="notempty" ></textarea></td>
+			</tr>
+			<tr>
+				<td>sample_output</td>
+				<td><textarea name="sample_output" class="jdmd_input" validate="notempty" ></textarea></td>
+			</tr>
+			<tr>
+				<td>提示</td>
+				<td><input name="hint" class="jdmd_input" /></td>
+			</tr>
+			<tr>
+				<td>题目来源</td>
+				<td><input name="source" class="jdmd_input" /></td>
+			</tr>
+			<tr class="rundata rundata_sample">
+				<td>测试数据<div class="rundata_num">0</div></td>
+				<td>
+					<input type="radio" id="rundata_type_0_input" name="rundata_type_0" value="input" />
+					<label for="rundata_type_0_input">输入</label>
+					<input type="radio" id="rundata_type_0_upload" name="rundata_type_0" value="upload" />
+					<label for="rundata_type_0_upload">上传文件</label>
+					<div class="rundata_input_block">
+						<textarea name="rundata_input"></textarea>
+					</div>
+					<div class="rundata_upload_block">
+						<input type="file" name="rundata_upload" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><a href="#" id="add_rundata">增加一组测试数据</a></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="确定添加" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
