@@ -51,7 +51,17 @@ jdmd_widget.validate = function(o){
 	return rtn;
 }
 jdmd_widget.showError=function(o,msg){
-	jQuery(o).parent().append("<div class='jdmd_widget_validate_error'>"+msg+"</div>");
+	jQuery(o).parent().append("<div class='jdmd_widget_validate_error'><div class='icon'></div><div class='content'>"+msg+"</div></div>");
+}
+jdmd_widget.validate_and_error_all = function(o){
+	var rtn = true;
+	jQuery(o).find('.jdmd_input').each(function(){
+		var v = jdmd_widget.validate_and_error(this);
+		if( false == v ){
+			rtn = false;
+		}
+	});
+	return rtn;
 }
 
 if( jQuery != undefined ){

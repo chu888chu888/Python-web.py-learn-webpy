@@ -2,3 +2,15 @@
 }
 .jdmd_button{
 }
+.jdmd_widget_validate_error .content{
+	display: inline-block;
+	color: red;
+}
+.jdmd_widget_validate_error .icon{
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-left: 10px solid GoldenRod ;
+	border-bottom: 5px solid transparent;
+	display:inline-block ;
+}
