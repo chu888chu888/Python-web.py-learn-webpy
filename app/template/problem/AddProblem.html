@@ -4,6 +4,9 @@ $varDict['styles'].append('jdmd_widget.css')
 $varDict['js'].append('jquery.js')
 $varDict['js'].append('jdmd_widget.js')
 
+$varDict['styles'].append('problem/AddProblem.css')
+$varDict['js'].append('problem/AddProblem.js')
+
 <div>
 	<form action="/problem/AddProblemResult" method="post">
 		<table>
@@ -48,17 +51,17 @@ $varDict['js'].append('jdmd_widget.js')
 				<td><input name="source" class="jdmd_input" /></td>
 			</tr>
 			<tr class="rundata rundata_sample">
-				<td>测试数据<div class="rundata_num">0</div></td>
+				<td>测试数据<div class="rundata_num">{num}</div></td>
 				<td>
-					<input type="radio" id="rundata_type_0_input" name="rundata_type_0" value="input" />
-					<label for="rundata_type_0_input">输入</label>
-					<input type="radio" id="rundata_type_0_upload" name="rundata_type_0" value="upload" />
-					<label for="rundata_type_0_upload">上传文件</label>
+					<input type="radio" id="rundata_type_input_{num}" class="rundata_type" name="rundata_type_{num}" value="input" />
+					<label for="rundata_type_input_{num}">输入</label>
+					<input type="radio" id="rundata_type_upload_{num}" class="rundata_type" name="rundata_type_{num}" value="upload" />
+					<label for="rundata_type_upload_{num}">上传文件</label>
 					<div class="rundata_input_block">
-						<textarea name="rundata_input"></textarea>
+						<textarea name="rundata_input_{num}"></textarea>
 					</div>
 					<div class="rundata_upload_block">
-						<input type="file" name="rundata_upload" />
+						<input type="file" name="rundata_upload_{num}" />
 					</div>
 				</td>
 			</tr>
