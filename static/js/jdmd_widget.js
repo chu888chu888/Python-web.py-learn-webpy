@@ -7,6 +7,7 @@ jdmd_widget.init = function(){
 jdmd_widget.validate_and_error = function(o){
 	var rst = jdmd_widget.validate(o);
 	if( true == rst.result ){
+		jdmd_widget.clearError(o);
 		return true;
 	}else{
 		jdmd_widget.showError(o,rst.msg);
@@ -49,6 +50,9 @@ jdmd_widget.validate = function(o){
 	}
 	
 	return rtn;
+}
+jdmd_widget.clearError=function(o){
+	jQuery(o).parent().find('.jdmd_widget_validate_error').remove();
 }
 jdmd_widget.showError=function(o,msg){
 	jQuery(o).parent().append("<div class='jdmd_widget_validate_error'><div class='icon'></div><div class='content'>"+msg+"</div></div>");

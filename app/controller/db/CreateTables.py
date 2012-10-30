@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from controller.base.WebPageController import WebPageController
 import db.DbCreator
 
@@ -20,7 +22,7 @@ class CreateTables(WebPageController):
 			PRIMARY KEY (`uid`) \
 			)");
 		self.m_db.query("CREATE TABLE IF NOT EXISTS `problem` ( \
-			`pid` int(10) NOT NULL COMMENT '内部id,题号由时间排序得到', \
+			`pid` int(10) NOT NULL AUTO_INCREMENT COMMENT '内部id,题号由时间排序得到', \
 			`title` varchar(60) NOT NULL COMMENT '题目标题', \
 			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳', \
 			`time_limit` int(10) NOT NULL COMMENT '单位：ms' , \

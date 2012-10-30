@@ -8,7 +8,7 @@ $varDict['styles'].append('problem/AddProblem.css')
 $varDict['js'].append('problem/AddProblem.js')
 
 <div>
-	<form action="/problem/AddProblemResult" method="post">
+	<form action="/problem/AddProblemResult" method="post" enctype="multipart/form-data" >
 		<table>
 			<tr>
 				<td>标题</td>
@@ -53,15 +53,21 @@ $varDict['js'].append('problem/AddProblem.js')
 			<tr class="rundata rundata_sample">
 				<td>测试数据<div class="rundata_num">{num}</div></td>
 				<td>
-					<input type="radio" id="rundata_type_input_{num}" class="rundata_type" name="rundata_type_{num}" value="input" />
-					<label for="rundata_type_input_{num}">输入</label>
-					<input type="radio" id="rundata_type_upload_{num}" class="rundata_type" name="rundata_type_{num}" value="upload" />
-					<label for="rundata_type_upload_{num}">上传文件</label>
-					<div class="rundata_input_block">
-						<textarea name="rundata_input_{num}"></textarea>
+					<div class="rundata_indata_upload_block">
+						输入数据
+						<input
+							type="file"
+							name="rundata_indata_upload_{num}"
+							class="jdmd_input"
+							value="indata" />
 					</div>
-					<div class="rundata_upload_block">
-						<input type="file" name="rundata_upload_{num}" />
+					<div class="rundata_outdata_upload_block">
+						输出数据
+						<input
+							type="file"
+							name="rundata_outdata_upload_{num}"
+							class="jdmd_input"
+							value="outdata" />
 					</div>
 				</td>
 			</tr>
