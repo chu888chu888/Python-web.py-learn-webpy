@@ -6,12 +6,15 @@ import web
 import model.Model
 
 class WebPageController(Controller.Controller):
+	config = {
+		'title':u'无标题',
+	}
 	def __init__(self):
 		super(WebPageController,self).__init__()
 		
 		self.setVariable('styles',list())
 		self.setVariable('js',list())
-		self.setVariable('title',u'无标题')
+		self.setVariable('title', '%s - JDMD Online Judget'%self.config['title'] )
 	
 	def buildView(self):
 		aView = view.View.View()

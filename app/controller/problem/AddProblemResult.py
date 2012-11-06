@@ -51,10 +51,11 @@ class AddProblemResult(FrameController):
 		
 		data = web.input( ** defaultDataMap )
 		
-		print data
-		
 		dirpath = 'privatedata/rundata/%d/'%pid
-		os.mkdir( dirpath ) 
+		try:
+			os.makedirs( dirpath )
+		except:
+			pass
 		for key in data:
 			if reg.match( key ):
 				filepath = dirpath + key + '.dat'

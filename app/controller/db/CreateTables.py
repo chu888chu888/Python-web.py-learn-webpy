@@ -20,7 +20,7 @@ class CreateTables(WebPageController):
 			`email` varchar(60) NOT NULL, \
 			`avatar` varchar(100) , \
 			PRIMARY KEY (`uid`) \
-			)");
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8");
 		self.m_db.query("CREATE TABLE IF NOT EXISTS `problem` ( \
 			`pid` int(10) NOT NULL AUTO_INCREMENT COMMENT '内部id,题号由时间排序得到', \
 			`title` varchar(60) NOT NULL COMMENT '题目标题', \
@@ -36,7 +36,7 @@ class CreateTables(WebPageController):
 			`source` varchar(100) NOT NULL,\
 			`authorid` int(10) NOT NULL,\
 			PRIMARY KEY (`pid`) \
-			)");
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8");
 		self.m_db.query("CREATE TABLE IF NOT EXISTS `problem_num`(\
 			`pnum` int(10) NOT NULL COMMENT '题号',\
 			`pid` int(10) NOT NULL COMMENT '题目真实id',\
