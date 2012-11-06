@@ -16,9 +16,15 @@ class LoginResult(FrameController):
 			self.setVariable('msg','登录成功')
 			self.setVariable('loginresult',True)
 			s = web.config._session
-			print l[0]
-			s['uid'] = l[0]['uid']
-			print s
+			uid = l[0]['uid']
+			s['uid'] = uid
+			
+			aPermissionModel = model.Model.Model('permission')
+			permissionIter = aPermissionModel.select({'uid':uid})
+			permissionList = []
+			for p in permissionIter:
+				permissionList.append( p['permission'] )
+			s['permissionList'] = permissionList
 		else:
 			self.setVariable('msg','登录失败')
 			self.setVariable('loginresult',False)

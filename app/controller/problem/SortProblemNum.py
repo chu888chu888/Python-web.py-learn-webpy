@@ -5,8 +5,9 @@ import model
 import time
 
 class SortProblemNum(FrameController):
-	config = {
+	s_config = {
 		'title':u'重新安排题号',
+		'permission':'editProblem',
 	}
 	def process(self):
 		# 清空 problem_num
@@ -21,9 +22,6 @@ class SortProblemNum(FrameController):
 		# 安排题号
 		nProblemNum = 1000
 		for i in aProblemIter:
-			print i['pid']
-			print i['title']
-			print i['addtime']
 			aProblemList.append({
 				'pid':i['pid'],
 				'title':i['title'],

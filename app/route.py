@@ -9,6 +9,7 @@ sys.path.append(app_root)
 
 import controller.NotFound
 import controller.Index
+import controller.PermissionDenied
 import render.Render
 
 class route:
@@ -35,9 +36,12 @@ class route:
         else:
             controllerClass = self.importModule(arrPath)
             if controllerClass != None:
-                controller = controllerClass()
+                if True == controllerClass.isPermit():
+                    controller = controllerClass()
+                else:
+                    controller = self.createPermissionDeniedController()
             else:
-                controller = self.createNotFoundController(arrPath)
+                controller = self.createNotFoundController()
         return controller
         
     def importModule(self,arrPath):
@@ -57,7 +61,11 @@ class route:
             return None
         return c
         
-    def createNotFoundController(self,arrPath):
+    def createPermissionDeniedController(self):
+        c = controller.PermissionDenied.PermissionDenied()
+        return c
+        
+    def createNotFoundController(self):
         c = controller.NotFound.NotFound()
         return c
         

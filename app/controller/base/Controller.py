@@ -2,8 +2,11 @@
 
 import PathInvalid
 import view.View
+import web
 
 class Controller(object):
+	s_config = {
+	}
 	def __init__(self):
 		prefix = 'app.controller.'
 		modulePath = self.__module__
@@ -57,7 +60,7 @@ class Controller(object):
 		
 	def view(self):
 		return self.m_view
-	
+		
 	def setUrlPath(self,urlPath):
 		self.m_urlPath = urlPath
 		
@@ -66,3 +69,29 @@ class Controller(object):
 		
 	def addPostProcess(self,strPpName):
 		self.m_pplist.append(strPpName)
+		
+	@classmethod
+	def isPermit(cls):
+		if cls.hasConfig('permission'):
+			s = web.config._session
+			if hasattr(s,'permissionList'):
+				permissionList = s['permissionList']
+				permission = cls.config('permission')
+				if permission in permissionList:
+					return True
+				else:
+					return False
+			else:
+				return False
+		return True
+		
+	@classmethod
+	def hasConfig(cls,key):
+		return cls.s_config.has_key(key)
+		
+	@classmethod
+	def config(cls,key,defaultValue=None):
+		if cls.hasConfig(key):
+			return cls.s_config[key]
+		else:
+			return defaultValue

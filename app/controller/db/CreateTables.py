@@ -42,3 +42,9 @@ class CreateTables(WebPageController):
 			`pid` int(10) NOT NULL COMMENT '题目真实id',\
 			PRIMARY KEY (`pnum`) \
 			)");
+		self.m_db.query("CREATE TABLE IF NOT EXISTS `permission`(\
+			`id` int(10) NOT NULL AUTO_INCREMENT,\
+			`uid` int(10) NOT NULL COMMENT '用户id',\
+			`permission` varchar(20) NOT NULL COMMENT '权限',\
+			PRIMARY KEY (`id`) \
+			)")
