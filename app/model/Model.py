@@ -13,7 +13,7 @@ class Model(object):
 			**dictData
 		)
 		
-	def select(self,dictWhere=dict(),order=None):
+	def select(self,dictWhere=dict(),**other):
 		listWhere = []
 		dictVars = dict()
 		for key in dictWhere:
@@ -26,7 +26,7 @@ class Model(object):
 			self.m_tableName,
 			dictWhere,
 			where = whereString,
-			order = order
+			**other
 		)
 		
 	def str_md5(self,str):
@@ -36,3 +36,6 @@ class Model(object):
 		
 	def truncate(self):
 		return self.m_db.query('truncate table %s'%self.m_tableName)
+		
+	def query(self, sql_query, vars=None):
+		return self.m_db.query(sql_query,vars = vars)

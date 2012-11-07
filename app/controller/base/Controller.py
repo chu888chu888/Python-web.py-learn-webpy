@@ -21,6 +21,8 @@ class Controller(object):
 		self.m_variableDict = dict()
 		self.m_pplist = list()
 		
+		self.setVariable('c',self)
+		
 	def buildView(self):
 		aView = view.View.View()
 		aView.setTemplatePath(self.m_path.replace('.','/'))
