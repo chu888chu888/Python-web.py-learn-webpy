@@ -14,10 +14,8 @@ class WebPageController(Controller.Controller):
 		
 		self.setVariable('styles',list())
 		self.setVariable('js',list())
-		self.setVariable(
-			'title',
-			'%s - JDMD Online Judget'%self.config('title',u'无标题')
-		)
+		
+		self.addPostProcess('readconfig')
 	
 	def buildView(self):
 		aView = view.View.View()
@@ -27,3 +25,9 @@ class WebPageController(Controller.Controller):
 		aFrameView = view.View.View()
 		aFrameView.setTemplatePath('frame/frame')
 		aFrameView.addSubView('body',aView)
+		
+	def ppReadconfig(self):
+		self.setVariable(
+			'title',
+			'%s - JDMD Online Judget'%self.config('title',u'无标题')
+		)

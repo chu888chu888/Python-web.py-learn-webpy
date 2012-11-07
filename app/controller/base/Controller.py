@@ -97,3 +97,7 @@ class Controller(object):
 			return cls.s_config[key]
 		else:
 			return defaultValue
+		
+	@classmethod
+	def setConfig(cls,key,value):
+		cls.s_config[key] = value

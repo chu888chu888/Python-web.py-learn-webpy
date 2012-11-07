@@ -1,0 +1,58 @@
+$def with(varDict)
+
+$varDict['styles'].append('problem/Detail.css')
+
+<div class="problem_detail">
+	<div class="title">
+		<div class="content">$varDict['problemInfo']['title']</div>
+	</div>
+	<div class="limit">
+		<div class="time_limit">
+			<div class="itemname">时间限制</div>
+			<div class="content">$varDict['problemInfo']['time_limit'] ms</div>
+		</div>
+		<div class="memory_limit">
+			<div class="itemname">内存限制</div>
+			<div class="content">$varDict['problemInfo']['memory_limit'] KB</div>
+		</div>
+	</div>
+	<div class="problem_content">
+		<div class="description">
+			<div class="itemname">题目描述</div>
+			<div class="content">$varDict['problemInfo']['description']</div>
+		</div>
+		<div class="input">
+			<div class="itemname">输入</div>
+			<div class="content">$varDict['problemInfo']['input']</div>
+		</div>
+		<div class="output">
+			<div class="itemname">输出</div>
+			<div class="content">$varDict['problemInfo']['output']</div>
+		</div>
+		<div class="sample_input">
+			<div class="itemname">样例输入</div>
+			<div class="content">$varDict['problemInfo']['sample_input']</div>
+		</div>
+		<div class="sample_output">
+			<div class="itemname">样例输出</div>
+			<div class="content">$varDict['problemInfo']['sample_output']</div>
+		</div>
+		<div class="hint">
+			<div class="itemname">提示</div>
+			<div class="content">$varDict['problemInfo']['hint']</div>
+		</div>
+		<div class="source">
+			<div class="itemname">来源</div>
+			<div class="content">$varDict['problemInfo']['source']</div>
+		</div>
+		<div class="author">
+			<div class="itemname">作者</div>
+			<div class="content">$varDict['problemInfo']['author']</div>
+		</div>
+	</div>
+	<div class="bottom_link">
+		<a href="/problem/Rank">本题统计与排名</a>
+		<a href="/problem/Submit?pnum=$varDict['problemInfo']['pnum']">提交代码</a>
+		<a href="/bbs/Search?pnum=$varDict['problemInfo']['pnum']">关于本题的讨论</a>
+	</div>
+</div>

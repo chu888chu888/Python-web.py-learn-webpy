@@ -9,7 +9,7 @@ $def with(varDict)
 $for p in varDict['aProblemIter']:
 	<tr>
 		<td>$p['pnum']</td>
-		<td><a href='/problem/Detail?&pnum=$p["pnum"]'>$p['title']</a></td>
+		<td><a href='/problem/Detail?pnum=$p["pnum"]'>$p['title']</a></td>
 		<td>$varDict['c'].ftime(p['addtime'])</td>
 	</tr>
 </table>
