@@ -25,6 +25,10 @@ class LoginResult(FrameController):
 			for p in permissionIter:
 				permissionList.append( p['permission'] )
 			s['permissionList'] = permissionList
+			
+			aUserinfoModel = model.Model.Model('userinfo')
+			for userinfo in aUserinfoModel.select({'uid':uid}) :
+				s['userinfo'] = userinfo
 		else:
 			self.setVariable('msg','登录失败')
 			self.setVariable('loginresult',False)

@@ -35,6 +35,5 @@ class FrameController(WebPageController.WebPageController):
 		self.setVariable('uid',uid)
 		
 		# userinfo
-		mUserInfo = model.Model.Model('userinfo')
-		for userinfo in mUserInfo.select({'uid':uid}) :
-			self.setVariable('userinfo',userinfo)
+		if hasattr(s,'userinfo'):
+			self.setVariable('userinfo',s['userinfo'])

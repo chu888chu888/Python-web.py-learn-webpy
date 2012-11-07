@@ -6,10 +6,7 @@ import web
 class Logout(FrameController):
 	def process(self):
 		s = web.config._session
-		if hasattr(s,'uid'):
-			del s['uid']
-		if hasattr(s,'permissionList'):
-			del s['permissionList']
+		s.kill()
 		
 		i = web.input()
 		# redirect
