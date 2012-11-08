@@ -3,6 +3,12 @@ jdmd_widget.init = function(){
 	jQuery('.jdmd_input').change(function(){
 		jdmd_widget.validate_and_error( this );
 	});
+	jQuery('.jdmd_validate_submit').click(function(){
+		var form = jQuery(this).closest('form').first();
+		if( ! jdmd_widget.validate_and_error_all( form ) ){
+			return false;
+		}
+	});
 }
 jdmd_widget.validate_and_error = function(o){
 	var rst = jdmd_widget.validate(o);
@@ -10,6 +16,7 @@ jdmd_widget.validate_and_error = function(o){
 		jdmd_widget.clearError(o);
 		return true;
 	}else{
+		jdmd_widget.clearError(o);
 		jdmd_widget.showError(o,rst.msg);
 		return false;
 	}
@@ -32,7 +39,9 @@ jdmd_widget.validate = function(o){
 		msg:''
 	};
 	for(i in validate_list){
-		var v = validate_list[i];
+		var vi = validate_list[i];
+		var vil = vi.split(':');
+		v=vil[0];
 		switch(v){
 		case 'notempty':
 			if( '' == val ){
@@ -46,6 +55,21 @@ jdmd_widget.validate = function(o){
 				rtn.msg += '内容必须为数字;';
 			}
 			break;
+		case 'min-length':
+			if( val.length < vil[1] ){
+				rtn.result = false;
+				rtn.msg += '内容的长度不得少于`'+vil[1]+'`;';
+			}
+			break;
+		case 'max-length':
+			if( val.length > vil[1] ){
+				rtn.result = false;
+				rtn.msg += '内容的长度不得超过`'+vil[1]+'`;';
+			}
+			break;
+		default:
+			rtn.result = false;
+			rtn.msg += '未知验证:`'+v+'`;';
 		}
 	}
 	

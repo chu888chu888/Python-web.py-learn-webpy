@@ -24,6 +24,7 @@ class LoginResult(FrameController):
 			permissionList = []
 			for p in permissionIter:
 				permissionList.append( p['permission'] )
+			permissionList.append('login')
 			s['permissionList'] = permissionList
 			
 			aUserinfoModel = model.Model.Model('userinfo')
