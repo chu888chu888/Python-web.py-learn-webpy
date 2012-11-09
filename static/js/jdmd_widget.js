@@ -12,11 +12,10 @@ jdmd_widget.init = function(){
 }
 jdmd_widget.validate_and_error = function(o){
 	var rst = jdmd_widget.validate(o);
+	jdmd_widget.clearError(o);
 	if( true == rst.result ){
-		jdmd_widget.clearError(o);
 		return true;
 	}else{
-		jdmd_widget.clearError(o);
 		jdmd_widget.showError(o,rst.msg);
 		return false;
 	}

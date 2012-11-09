@@ -1,0 +1,7 @@
+$def with(varDict)
+
+$if varDict['success']:
+	<div>提交成功</div>
+$else:
+	<div>提交失败</div>
+	<div>$varDict['message']</div>

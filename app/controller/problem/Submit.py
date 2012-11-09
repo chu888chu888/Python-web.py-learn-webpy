@@ -3,6 +3,7 @@
 from controller.base.FrameController import FrameController
 import web
 import model
+import setting.Setting
 
 class Submit(FrameController):
 	s_config = {
@@ -32,3 +33,7 @@ class Submit(FrameController):
 			'Python 2.7.2',
 		]
 		self.setVariable('language',languageList)
+		
+		aSetting = setting.Setting.Setting()
+		code_maxlength = aSetting.value('problem/submit/code/maxlength',65535)
+		self.setVariable('code_maxlength',code_maxlength)

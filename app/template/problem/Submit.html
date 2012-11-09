@@ -23,14 +23,18 @@ $varDict['styles'].append('problem/Submit.css')
 		<input type='hidden' name='pid' value="$varDict['problemInfo']['pid']" />
 		<div class="language">
 			<div class="itemname">选择语言</div>
-			<select class="select">
+			<select name="language" class="select">
 				$for l in varDict['language']:
 					<option value="$l">$l</option>
 			</select>
 		</div>
 		<div class="code">
 			<div class="itemname">输入代码</div>
-			<textarea class="textarea jdmd_input" name="code" validate="min-length:50 max-length:65535"></textarea>
+			<textarea
+				class="textarea jdmd_input"
+				name="code"
+				validate="min-length:50 max-length:$varDict['code_maxlength']"
+			></textarea>
 		</div>
 		<div class="submit">
 			<input type="submit" class="jdmd_validate_submit" />

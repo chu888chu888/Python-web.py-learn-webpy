@@ -1,0 +1,31 @@
+$def with(varDict)
+
+<table border='1'>
+	<tr>
+		<th>题号</th>
+		<th>用户</th>
+		<th>提交时间</th>
+		<th>语言</th>
+		<th>代码长度</th>
+	</tr>
+$for s in varDict['aSubmitIter']:
+	<tr>
+		<td>
+			<a href="/problem/Detail?pnum=$s['pnum']">
+				$s['pnum']
+			</a>
+		</td>
+		<td>
+			<a href="/user/Homepage?uid=$s['uid']">
+				$s['nickname']
+			</a>
+		</td>
+		<td>$varDict['c'].ftime(s['sm.addtime'])</td>
+		<td>$s['language']</td>
+		<td>
+			<a href="/problem/ShowCode?sid=$s['sm.id']">
+				$len(s['code'])
+			</a>B
+		</td>
+	</tr>
+</table>
