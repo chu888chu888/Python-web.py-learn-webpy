@@ -1,9 +1,8 @@
 $def with(varDict)
 <?xml version="1.0" encoding="UTF-8"?>
 <list>
-	<success>$varDict['success']</success>
 	<result>$varDict['result']</result>
-$if varDict['success']:
+$if varDict['result'] == 'success':
 	$for s in varDict['aIter']:
 		<submit id="$s['id']" uid="$s['uid']" addtime="$s['addtime']">
 			<language>$s['language']</language>

@@ -16,9 +16,7 @@ class UnjudgeSubmitList(Controller):
 		
 		self.setVariable('aIter',aIter)
 		
-		self.setVariable('success',True)
-		self.setVariable('result','')
+		self.setVariable('result','success')
 		
 	def permissionDenied(self):
-		self.setVariable('success',False)
 		self.setVariable('result','permissionDenied')
