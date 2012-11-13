@@ -28,9 +28,9 @@ class Submit(FrameController):
 		self.setVariable('problemInfo',problemInfo)
 		
 		languageList = [
-			'g++ 4.6.1 (Ubuntu/Linaro 4.6.1-9ubuntu3)',
-			'gcc 4.6.1 (Ubuntu/Linaro 4.6.1-9ubuntu3)',
-			'Python 2.7.2',
+			'g++ 4.6',
+			'gcc 4.6',
+			'Python 2.7',
 		]
 		self.setVariable('language',languageList)
 		
