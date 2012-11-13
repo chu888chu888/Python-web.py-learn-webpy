@@ -1,0 +1,38 @@
+$def with(varDict)
+
+$varDict['js'].append('jquery.js')
+$varDict['js'].append('admin/Permission.js')
+$varDict['js'].append('jdmd_widget.js')
+
+$varDict['styles'].append('jdmd_widget.css')
+
+<div class="admin_permission">
+	<div class="message">
+		$if varDict['success']:
+			<div class="success">
+				成功为用户$varDict['addPermission']['userinfo']['nickname']
+				(uid:$varDict['addPermission']['userinfo']['uid'])
+				添加权限
+				$varDict['addPermission']['permission']
+			</div>
+		$else:
+			<div class='fail'>
+				添加失败
+				$varDict['message']
+			</div>
+	
+	<div class="form">
+		<form method='post'>
+			<div>用户id：<input name='uid' class="jdmd_input" validate="notempty int" /></div>
+			<div>权限名：<input name='permission' class="jdmd_input" validate="notempty" /></div>
+			<input type='submit' name='submit' />
+		</form>
+	</div>
+	<select size='10' class="userlist">
+		$for u in varDict['iter']:
+			<option value="$u['uid']">
+				<img src="$u['avatar']" />
+				$u['nickname']
+			</option>
+	</select>
+</div>
