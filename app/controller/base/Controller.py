@@ -29,7 +29,10 @@ class Controller(object):
 		self.setView(aView)
 		
 	def run(self,renderObject):
-		self.process()
+		if self.isPermit():
+			self.process()
+		else:
+			self.permissionDenied()
 		
 		for strPpName in self.m_pplist:
 			func = getattr(self,'pp'+strPpName.capitalize())
@@ -39,6 +42,10 @@ class Controller(object):
 		
 	def process(self):
 		pass
+		
+	def permissionDenied(self):
+		self.setVariable('urlPath',self.m_urlPath)
+		self.m_path = 'PermissionDenied'
 		
 	def render(self,renderObject):
 		if 'frameview' == self.m_renderType or 'view' == self.m_renderType:
@@ -72,13 +79,12 @@ class Controller(object):
 	def addPostProcess(self,strPpName):
 		self.m_pplist.append(strPpName)
 		
-	@classmethod
-	def isPermit(cls):
-		if cls.hasConfig('permission'):
+	def isPermit(self):
+		if self.hasConfig('permission'):
 			s = web.config._session
 			if hasattr(s,'permissionList'):
 				permissionList = s['permissionList']
-				permission = cls.config('permission')
+				permission = self.config('permission')
 				if permission in permissionList:
 					return True
 				else:
