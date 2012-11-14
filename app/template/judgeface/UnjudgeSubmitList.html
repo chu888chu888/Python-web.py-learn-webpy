@@ -4,7 +4,7 @@ $def with(varDict)
 	<result>$varDict['result']</result>
 $if varDict['result'] == 'success':
 	$for s in varDict['aIter']:
-		<submit id="$s['id']" uid="$s['uid']" addtime="$s['addtime']">
+		<submit id="$s['id']" pid="$s['pid']" uid="$s['uid']" addtime="$s['addtime']">
 			<language>$s['language']</language>
 			<code><![CDATA[$:s['code']]]></code>
 		</submit>
