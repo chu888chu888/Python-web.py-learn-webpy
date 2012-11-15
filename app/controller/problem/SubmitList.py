@@ -13,10 +13,19 @@ class SubmitList(FrameController):
 		aSubmitIter = aSubmitModel.query(
 			'''select * ,
 				sm.addtime as `sm.addtime` ,
-				sm.id as `sm.id` from submit as sm
+				sm.id as `sm.id` ,
+				jr.id as `jr.id` ,
+				jr.addtime as `jr.addtime`
+				from submit sm
 				left join userinfo ui on sm.uid = ui.uid
 				left join problem pr on sm.pid = pr.pid
 				left join problem_num pn on pr.pid = pn.pid
+				left join judge_result jr on jr.sid = sm.id
+				where jr.addtime = (
+					select Max(ijr.addtime) from judge_result ijr
+					where ijr.sid = sm.id
+				)
+				order by sm.addtime DESC
 			'''
 		)
 		

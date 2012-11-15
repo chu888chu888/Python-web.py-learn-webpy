@@ -1,0 +1,8 @@
+$def with(varDict)
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<result>$varDict['result']</result>
+$if varDict['result'] == 'success':
+	<judgeResult id="$varDict['jrid']">
+	</judgeResult>
+</xml>

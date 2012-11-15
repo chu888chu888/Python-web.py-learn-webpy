@@ -2,14 +2,19 @@ $def with(varDict)
 
 <table border='1'>
 	<tr>
+		<th>提交id</th>
 		<th>题号</th>
 		<th>用户</th>
 		<th>提交时间</th>
 		<th>语言</th>
 		<th>代码长度</th>
+		<th>结果</th>
+		<th>判题id</th>
+		<th>判题时间</th>
 	</tr>
 $for s in varDict['aSubmitIter']:
 	<tr>
+		<td>$s['sm.id']</td>
 		<td>
 			<a href="/problem/Detail?pnum=$s['pnum']">
 				$s['pnum']
@@ -26,6 +31,18 @@ $for s in varDict['aSubmitIter']:
 			<a href="/problem/ShowCode?sid=$s['sm.id']">
 				$len(s['code'])
 			</a>B
+		</td>
+		<td>
+			$if s['result']:
+				$s['result']
+			$else:
+				waiting
+		</td>
+		<td>
+			$s['jr.id']
+		</td>
+		<td>
+			$varDict['c'].ftime(s['jr.addtime'])
 		</td>
 	</tr>
 </table>

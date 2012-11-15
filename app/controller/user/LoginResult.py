@@ -13,6 +13,8 @@ class LoginResult(FrameController):
 		l = r.list()
 		
 		if len(l) > 0:
+			web.header('Login-Result','success')
+			
 			self.setVariable('msg','登录成功')
 			self.setVariable('loginresult',True)
 			s = web.config._session
@@ -31,6 +33,7 @@ class LoginResult(FrameController):
 			for userinfo in aUserinfoModel.select({'uid':uid}) :
 				s['userinfo'] = userinfo
 		else:
+			web.header('Login-Result','fail')
 			self.setVariable('msg','登录失败')
 			self.setVariable('loginresult',False)
 		

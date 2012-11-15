@@ -52,9 +52,16 @@ class CreateTables(WebPageController):
 			`id` int(10) NOT NULL AUTO_INCREMENT,
 			`pid` int(10) NOT NULL COMMENT '题目id',
 			`uid` int(10) NOT NULL COMMENT '用户id',
-			`judgeResultId` int(10) NOT NULL COMMENT '结果id，默认为-1',
 			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳',
 			`language` varchar(30) NOT NULL COMMENT '语言',
 			`code` TEXT NOT NULL,
+			PRIMARY KEY (`id`)
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
+		self.m_db.query('''CREATE TABLE IF NOT EXISTS `judge_result`(
+			`id` int(10) NOT NULL AUTO_INCREMENT,
+			`sid` int(10) NOT NULL COMMENT 'submit id',
+			`juid` int(10) NOT NULL COMMENT 'judge 用户 id',
+			`result` varchar(20) NOT NULL,
+			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳',
 			PRIMARY KEY (`id`)
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
