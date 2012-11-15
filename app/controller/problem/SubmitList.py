@@ -20,11 +20,7 @@ class SubmitList(FrameController):
 				left join userinfo ui on sm.uid = ui.uid
 				left join problem pr on sm.pid = pr.pid
 				left join problem_num pn on pr.pid = pn.pid
-				left join judge_result jr on jr.sid = sm.id
-				where jr.addtime = (
-					select Max(ijr.addtime) from judge_result ijr
-					where ijr.sid = sm.id
-				)
+				left join judge_result jr on jr.sid = sm.id and jr.id = sm.judgeResultId
 				order by sm.addtime DESC
 			'''
 		)

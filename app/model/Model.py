@@ -29,6 +29,9 @@ class Model(object):
 			**other
 		)
 		
+	def update(self,where, vars=None, **values):
+		return self.m_db.update( self.m_tableName,where,vars,**values )
+		
 	def str_md5(self,str):
 		m = hashlib.md5()
 		m.update(str)

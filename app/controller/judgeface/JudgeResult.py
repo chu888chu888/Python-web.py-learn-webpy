@@ -22,6 +22,13 @@ class JudgeResult(Controller):
 			addtime = int( time.time() )
 		) )
 		
+		aSubmitModel = model.Model.Model('submit')
+		aSubmitModel.update(
+			'id = $id',
+			dict(id=int(i['sid'])),
+			judgeResultId = jrid
+		)
+		
 		self.setVariable('result','success')
 		self.setVariable('jrid' , jrid )
 		

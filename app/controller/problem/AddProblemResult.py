@@ -6,6 +6,10 @@ import re
 import os
 
 class AddProblemResult(FrameController):
+	s_config = {
+		'title':u'添加题目结果',
+		'permission':'editProblem',
+	}
 	def process(self):
 		i = web.input()
 		

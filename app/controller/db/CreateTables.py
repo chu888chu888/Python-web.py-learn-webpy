@@ -52,6 +52,7 @@ class CreateTables(WebPageController):
 			`id` int(10) NOT NULL AUTO_INCREMENT,
 			`pid` int(10) NOT NULL COMMENT '题目id',
 			`uid` int(10) NOT NULL COMMENT '用户id',
+			`judgeResultId` int(10) NOT NULL COMMENT '结果id，默认为-1',
 			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳',
 			`language` varchar(30) NOT NULL COMMENT '语言',
 			`code` TEXT NOT NULL,
