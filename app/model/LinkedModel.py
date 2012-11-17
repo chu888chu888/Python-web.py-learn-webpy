@@ -14,7 +14,15 @@ class LinkedModel(object):
 		return self
 		
 	def where(self,w):
-		self.__appendLinkedData('where',w)
+		if isinstance(w,basestring):
+			self.__appendLinkedData('where',w)
+		elif isinstance(w,dict):
+			for i in w:
+				v = w[i]
+				if isinstance(v,int):
+					self.__appendLinkedData('where','%s = %d'%(i,v))
+				else:
+					self.__appendLinkedData('where','%s = "%s"'%(i,v))
 		return self
 		
 	def order(self,w):

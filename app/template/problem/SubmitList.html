@@ -1,48 +1,68 @@
 $def with(varDict)
 
-<table border='1'>
-	<tr>
-		<th>提交id</th>
-		<th>题号</th>
-		<th>用户</th>
-		<th>提交时间</th>
-		<th>语言</th>
-		<th>代码长度</th>
-		<th>结果</th>
-		<th>判题id</th>
-		<th>判题时间</th>
-	</tr>
-$for s in varDict['aSubmitIter']:
-	<tr>
-		<td>$s['sm.id']</td>
-		<td>
-			<a href="/problem/Detail?pnum=$s['pn.pnum']">
-				$s['pn.pnum']
-			</a>
-		</td>
-		<td>
-			<a href="/user/Homepage?uid=$s['ui.uid']">
-				$s['ui.nickname']
-			</a>
-		</td>
-		<td>$varDict['c'].ftime(s['sm.addtime'])</td>
-		<td>$s['sm.language']</td>
-		<td>
-			<a href="/problem/ShowCode?sid=$s['sm.id']">
-				$len(s['sm.code'])
-			</a>B
-		</td>
-		<td>
-			$if s['jr.result']:
-				$s['jr.result']
-			$else:
-				waiting
-		</td>
-		<td>
-			$s['jr.id']
-		</td>
-		<td>
-			$varDict['c'].ftime(s['jr.addtime'])
-		</td>
-	</tr>
-</table>
+$varDict['styles'].append('problem/SubmitList.css')
+
+<div class="problem_submitlist">
+	<div class="search_area">
+		<form>
+			用户id：
+			<input name="uid" value="$varDict['formvalue']['uid']" />
+			题号：
+			<input name="pnum" value="$varDict['formvalue']['pnum']" />
+			<input type="submit" value='搜索' />
+		</form>
+		<a href='/problem/SubmitList'>返回完整列表</a>
+	</div>
+	<table border='1'>
+		<tr>
+			<th>提交id</th>
+			<th>题号</th>
+			<th>用户</th>
+			<th>提交时间</th>
+			<th>语言</th>
+			<th>代码长度</th>
+			<th>结果</th>
+			<th>判题id</th>
+			<th>判题时间</th>
+		</tr>
+	$for s in varDict['aSubmitIter']:
+		<tr>
+			<td>$s['sm.id']</td>
+			<td>
+				<a href="/problem/Detail?pnum=$s['pn.pnum']">
+					$s['pn.pnum']
+				</a>
+			</td>
+			<td>
+				<a href="/user/Homepage?uid=$s['ui.uid']">
+					$s['ui.nickname']
+				</a>
+			</td>
+			<td>$varDict['c'].ftime(s['sm.addtime'])</td>
+			<td>$s['sm.language']</td>
+			<td>
+				<a href="/problem/ShowCode?sid=$s['sm.id']">
+					$len(s['sm.code'])
+				</a>B
+			</td>
+			<td>
+				$if s['jr.result']:
+					$s['jr.result']
+				$else:
+					waiting
+			</td>
+			<td>
+				$if s['jr.id']:
+					$s['jr.id']
+				$else:
+					-
+			</td>
+			<td>
+				$if s['jr.addtime']:
+					$varDict['c'].ftime(s['jr.addtime'])
+				$else:
+					-
+			</td>
+		</tr>
+	</table>
+</div>
