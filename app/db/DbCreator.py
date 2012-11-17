@@ -6,7 +6,16 @@ if os.environ.has_key('SERVER_SOFTWARE'):
 	import sae.const
 
 class DbCreator(object):
-	def create(self):
+	__instance = None
+	
+	@classmethod
+	def instance(cls):
+		if not cls.__instance:
+			cls.__instance = cls.create()
+		return cls.__instance
+		
+	@classmethod
+	def create(cls):
 		if os.environ.has_key('SERVER_SOFTWARE'):
 			return web.database(
 				dbn="mysql",

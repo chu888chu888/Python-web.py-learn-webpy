@@ -16,25 +16,25 @@ $for s in varDict['aSubmitIter']:
 	<tr>
 		<td>$s['sm.id']</td>
 		<td>
-			<a href="/problem/Detail?pnum=$s['pnum']">
-				$s['pnum']
+			<a href="/problem/Detail?pnum=$s['pn.pnum']">
+				$s['pn.pnum']
 			</a>
 		</td>
 		<td>
-			<a href="/user/Homepage?uid=$s['uid']">
-				$s['nickname']
+			<a href="/user/Homepage?uid=$s['ui.uid']">
+				$s['ui.nickname']
 			</a>
 		</td>
 		<td>$varDict['c'].ftime(s['sm.addtime'])</td>
-		<td>$s['language']</td>
+		<td>$s['sm.language']</td>
 		<td>
 			<a href="/problem/ShowCode?sid=$s['sm.id']">
-				$len(s['code'])
+				$len(s['sm.code'])
 			</a>B
 		</td>
 		<td>
-			$if s['result']:
-				$s['result']
+			$if s['jr.result']:
+				$s['jr.result']
 			$else:
 				waiting
 		</td>

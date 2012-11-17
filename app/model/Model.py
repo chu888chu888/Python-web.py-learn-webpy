@@ -4,8 +4,7 @@ import hashlib
 class Model(object):
 	def __init__(self,sTableName):
 		self.m_tableName = sTableName
-		DbCreator = db.DbCreator.DbCreator()
-		self.m_db = DbCreator.create()
+		self.m_db =db.DbCreator.DbCreator.instance()
 	
 	def insert(self,dictData):
 		return self.m_db.insert(
