@@ -26,7 +26,7 @@ class SubmitList(FrameController):
 		else:
 			formvalue['pnum'] = None
 		
-		if i.has_key('result') and i['result']:
+		if i.has_key('result') and i['result'] and i['result'] != 'all':
 			condition['jr.result'] = i['result']
 			formvalue['result'] = i['result']
 		else:

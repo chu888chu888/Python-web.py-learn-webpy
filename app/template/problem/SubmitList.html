@@ -10,7 +10,14 @@ $varDict['styles'].append('problem/SubmitList.css')
 			题号：
 			<input name="pnum" value="$varDict['formvalue']['pnum']" />
 			结果
-			<input name="result" value="$varDict['formvalue']['result']" />
+			<select name="result">
+				$ resultList = ['all','accept','compile error']
+				$for r in resultList:
+					$if r == varDict['formvalue']['result']:
+						<option value='$r' selected="selected">$r</option>
+					$else:
+						<option value="$r">$r</option>
+			</select>
 			<input type="submit" value='搜索' />
 		</form>
 		<a href='/problem/SubmitList'>返回完整列表</a>
