@@ -7,7 +7,7 @@ class LinkedModel(object):
 		self.__db =db.DbCreator.DbCreator.instance()
 		
 		# linked data
-		self.__linkedData = dict()
+		self.__clearLinkedData()
 		
 	def alias(self,a):
 		self.__setLinkedData('alias',a)
@@ -29,7 +29,7 @@ class LinkedModel(object):
 		self.__appendLinkedData('order',w)
 		return self
 		
-	def limit(self,length,offset):
+	def limit(self,length,offset=0):
 		self.__setLinkedData('limit',dict(length=length,offset=offset))
 		return self
 		
@@ -46,75 +46,39 @@ class LinkedModel(object):
 		return self
 		
 	def select(self):
-		# table and column
-		tableNameList = self.__getTableNameList()
-		columnNameListMap = dict()
-		for tableName in tableNameList:
-			columnNameListMap[ tableName ] = self.__getColumnList(tableName)
+		fieldString = self.__buildFieldString()
+		tableString = self.__buildTableString()
+		joinString = self.__buildJoinString()
+		whereString = self.__buildWhereString()
+		orderString = self.__buildOrderString()
+		limitString = self.__buildLimitString()
 			
-		print columnNameListMap
-		# table alias
-		tableAliasMap = self.__getTableAliasMap()
-		
-		# fieldString
-		fieldStringPartedList = list()
-		for tableName,columnNameList in columnNameListMap.iteritems():
-			for columnName in columnNameList:
-				tableAlias = tableAliasMap[ tableName ]
-				columnAlias = columnName
-				# fieldStringParted = ''
-				# print fieldStringParted
-				fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
-					tableAlias,
-					columnName,
-					tableAlias,
-					columnAlias
-				)
-				
-				fieldStringPartedList.append( fieldStringParted )
-				
-		fieldString = ",\n".join(fieldStringPartedList)
-		
-		# tableString
-		tableString = self.__getTableString()
-		
-		# joinString
-		joinStringPartedList = list()
-		for join in self.__getLinkedData('join'):
-			joinStringParted = '%s join `%s`'%(
-				join['jointype'],
-				join['jointable'],
-			)
-			if join['alias']:
-				joinStringParted = joinStringParted + ' as %s'%join['alias']
-			if join['on']:
-				joinStringParted = joinStringParted + ' on (%s)'%join['on']
-			joinStringPartedList.append( joinStringParted )
-		joinString = " \n".join( joinStringPartedList )
-		
-		# whereString
-		whereData = self.__getLinkedData('where')
-		if whereData:
-			whereString = "(" + " ) AND \n (".join( whereData ) + ")"
-		else:
-			whereString = '1'
-		
-		# orderString
-		orderData = self.__getLinkedData('order')
-		if orderData:
-			orderString = "order by "+','.join( orderData )
-		else:
-			orderString = ''
-		
-		queryString = "select \n%s \nfrom %s \n%s \nwhere %s \n%s"%(
+		queryString = "select \n%s \nfrom %s \n%s \nwhere %s \n%s \n%s"%(
 			fieldString,
 			tableString,
 			joinString,
 			whereString,
-			orderString
+			orderString,
+			limitString
 		)
 		
+		self.__clearLinkedData()
 		return self.__db.query(queryString)
+		
+	def count(self):
+		tableString = self.__buildTableString()
+		joinString = self.__buildJoinString()
+		whereString = self.__buildWhereString()
+		
+		queryString = "select count(*) from %s \n%s \nwhere %s"%(
+			tableString,
+			joinString,
+			whereString
+		)
+		
+		self.__clearLinkedData()
+		aIter = self.__db.query(queryString)
+		return aIter[0]['count(*)']
 		
 	def __appendLinkedData(self,name,value):
 		if not self.__linkedData.has_key(name):
@@ -130,6 +94,9 @@ class LinkedModel(object):
 			return self.__linkedData[name]
 		else:
 			return None
+		
+	def __clearLinkedData(self):
+		self.__linkedData = dict()
 		
 	def __getTableNameList(self):
 		tableNameList = list()
@@ -169,7 +136,35 @@ class LinkedModel(object):
 				
 		return tableAliasMap
 		
-	def __getTableString(self):
+	def __buildFieldString(self):
+		# table and column
+		tableNameList = self.__getTableNameList()
+		columnNameListMap = dict()
+		for tableName in tableNameList:
+			columnNameListMap[ tableName ] = self.__getColumnList(tableName)
+			
+		# table alias
+		tableAliasMap = self.__getTableAliasMap()
+		
+		# fieldString
+		fieldStringPartedList = list()
+		for tableName,columnNameList in columnNameListMap.iteritems():
+			for columnName in columnNameList:
+				tableAlias = tableAliasMap[ tableName ]
+				columnAlias = columnName
+				fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
+					tableAlias,
+					columnName,
+					tableAlias,
+					columnAlias
+				)
+				
+				fieldStringPartedList.append( fieldStringParted )
+				
+		fieldString = ",\n".join(fieldStringPartedList)
+		return fieldString
+		
+	def __buildTableString(self):
 		aliasData = self.__getLinkedData('alias')
 		if aliasData:
 			tableString = '`%s` as %s'%(self.__tableName,aliasData)
@@ -177,3 +172,42 @@ class LinkedModel(object):
 			tableString = '`%s`'%(self.__tableName)
 		
 		return tableString
+		
+	def __buildJoinString(self):
+		joinStringPartedList = list()
+		for join in self.__getLinkedData('join'):
+			joinStringParted = '%s join `%s`'%(
+				join['jointype'],
+				join['jointable'],
+			)
+			if join['alias']:
+				joinStringParted = joinStringParted + ' as %s'%join['alias']
+			if join['on']:
+				joinStringParted = joinStringParted + ' on (%s)'%join['on']
+			joinStringPartedList.append( joinStringParted )
+		joinString = " \n".join( joinStringPartedList )
+		return joinString
+		
+	def __buildWhereString(self):
+		whereData = self.__getLinkedData('where')
+		if whereData:
+			whereString = "(" + " ) AND \n (".join( whereData ) + ")"
+		else:
+			whereString = '1'
+		return whereString
+		
+	def __buildOrderString(self):
+		orderData = self.__getLinkedData('order')
+		if orderData:
+			orderString = "order by "+','.join( orderData )
+		else:
+			orderString = ''
+		return orderString
+		
+	def __buildLimitString(self):
+		limitData = self.__getLinkedData('limit')
+		if limitData:
+			limitString = 'limit %s,%s'%(limitData['offset'],limitData['length'])
+		else:
+			limitString = 'limit 30'
+		return limitString

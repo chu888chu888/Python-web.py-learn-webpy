@@ -9,6 +9,8 @@ $varDict['styles'].append('problem/SubmitList.css')
 			<input name="uid" value="$varDict['formvalue']['uid']" />
 			题号：
 			<input name="pnum" value="$varDict['formvalue']['pnum']" />
+			结果
+			<input name="result" value="$varDict['formvalue']['result']" />
 			<input type="submit" value='搜索' />
 		</form>
 		<a href='/problem/SubmitList'>返回完整列表</a>
@@ -65,4 +67,17 @@ $varDict['styles'].append('problem/SubmitList.css')
 			</td>
 		</tr>
 	</table>
+	<div class="pager">
+		$if varDict['pager']['current'] > 0:
+			<a href="?$varDict['pager']['link']page=0">第一页</a>
+			<a href="?$varDict['pager']['link']page=$(varDict['pager']['current']-1)">上一页</a>
+		$for p in range( varDict['pager']['begin'] , varDict['pager']['end']):
+			$if p != varDict['pager']['current']:
+				<a href="?$varDict['pager']['link']page=$p">$(p+1)</a>
+			$else:
+				$(p+1)
+		$if varDict['pager']['current'] < varDict['pager']['count'] -1:
+			<a href="?$varDict['pager']['link']page=$(varDict['pager']['current']+1)">下一页</a>
+			<a href="?$varDict['pager']['link']page=$(varDict['pager']['count']-1)">最后一页</a>
+	</div>
 </div>
