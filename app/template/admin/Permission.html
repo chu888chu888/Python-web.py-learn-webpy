@@ -1,10 +1,10 @@
 $def with(varDict)
 
-$varDict['js'].append('jquery.js')
-$varDict['js'].append('admin/Permission.js')
-$varDict['js'].append('jdmd_widget.js')
+$varDict['res'].append('jquery')
+$varDict['res'].append('admin/Permission')
+$varDict['res'].append('jdmd_widget')
 
-$varDict['styles'].append('jdmd_widget.css')
+$varDict['res'].append('jdmd_widget','css')
 
 <div class="admin_permission">
 	$if varDict.has_key('success'):

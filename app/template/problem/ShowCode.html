@@ -1,0 +1,95 @@
+$def with(varDict)
+
+$varDict['res'].add('problem/ShowCode','css')
+$varDict['res'].add('problem/code-style')
+$varDict['res'].add('problem/ShowCode')
+$varDict['res'].add('jquery')
+$varDict['res'].add('shjs-0.6/sh_main',option=varDict['res'].STATIC_PATH)
+
+<div class="problem_showcode">
+	<style id="style_sh" type="text/css"></style>
+	<div class="info">
+		<div class="problem">
+			<span class="h">题号</span>
+			<span class="c">
+				<a href="/problem/Detail?pnum=$varDict['aSubmitInfo']['pn.pnum']">
+					$varDict['aSubmitInfo']['pn.pnum']
+				</a>
+			</span>
+		</div>
+		<div class="user">
+			<span class="h">用户</span>
+			<span class="c">
+				<a href="/user/Homepage?uid=$varDict['aSubmitInfo']['ui.uid']">
+					$varDict['aSubmitInfo']['ui.nickname']
+				</a>
+			</span>
+		</div>
+		<div class="language">
+			<span class="h">语言</span>
+			<span class="c">$varDict['aSubmitInfo']['sm.language']</span>
+		</div>
+		<div class="result">
+			<span class="h">结果</span>
+			<span class="c">
+				$if varDict['aSubmitInfo']['jr.result']:
+					$varDict['aSubmitInfo']['jr.result']
+				$else:
+					waiting
+			</span>
+		</div>
+	</div>
+	<div class="code">
+		<div class="title">
+			<span class="h">代码</span>
+		</div>
+		<span class="theme">
+			<span class="h">代码高亮主题</span>
+			<select id="themeSelect" onchange="return loadStyle();">
+				<option>acid</option>
+				<option>berries-dark</option>
+				<option>berries-light</option>
+				<option>bipolar</option>
+				<option>blacknblue</option>
+				<option>bright</option>
+				<option>contrast</option>
+				<option>darkblue</option>
+				<option>darkness</option>
+				<option>desert</option>
+				<option>dull</option>
+				<option>easter</option>
+				<option>emacs</option>
+				<option>golden</option>
+				<option>greenlcd</option>
+				<option>ide-anjuta</option>
+				<option>ide-codewarrior</option>
+				<option>ide-devcpp</option>
+				<option>ide-eclipse</option>
+				<option>ide-kdev</option>
+				<option>ide-msvcpp</option>
+				<option>kwrite</option>
+				<option>matlab</option>
+				<option>navy</option>
+				<option>nedit</option>
+				<option>neon</option>
+				<option>night</option>
+				<option>pablo</option>
+				<option>peachpuff</option>
+				<option>print</option>
+				<option>rand01</option>
+				<option>the</option>
+				<option>typical</option>
+				<option>vampire</option>
+				<option>vim</option>
+				<option>vim-dark</option>
+				<option>whatis</option>
+				<option>whitengrey</option>
+				<option>zellner</option>
+			</select>
+		</span>
+		<span class="loading">
+			<img id="throbberImg" src="/static/image/ajax-loader.gif" alt="Loading..." style="display: none; " />
+		</span>
+		<pre>$varDict['aSubmitInfo']['sm.code']</pre>
+	</div>
+</div>

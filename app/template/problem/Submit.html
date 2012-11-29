@@ -1,10 +1,10 @@
 $def with(varDict)
 
-$varDict['styles'].append('jdmd_widget.css')
-$varDict['js'].append('jquery.js')
-$varDict['js'].append('jdmd_widget.js')
+$varDict['res'].add('jdmd_widget','css')
+$varDict['res'].add('jquery')
+$varDict['res'].add('jdmd_widget')
 
-$varDict['styles'].append('problem/Submit.css')
+$varDict['res'].add('problem/Submit','css')
 
 <div class="problem_submit">
 	<div class="page_title">提交代码</div>

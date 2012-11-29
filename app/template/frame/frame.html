@@ -6,10 +6,11 @@ $def with(varDict)
     <link rel="icon" href="/static/image/breaking.ico" mce_href="/static/image/breaking.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/static/image/breaking.ico" mce_href="/static/image/breaking.ico" type="image/x-icon">
     <title>$varDict['title']</title>
-    $for styleFile in varDict['styles']
-        <link rel="stylesheet" type="text/css" href="/static/css/$styleFile">
-    $for jsFile in varDict['js']
-        <script language="javascript" src="/static/js/$jsFile"></script>
+    $for r in varDict['res']:
+      $if 'js' == r['type']:
+        <script language="javascript" src="$r['path']"></script>
+      $elif 'css' == r['type']:
+        <link rel="stylesheet" type="text/css" href="$r['path']" />
   </head>
   <body>
   $:varDict['temp']['body']
