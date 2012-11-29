@@ -13,6 +13,7 @@ class WebPageController(Controller.Controller):
 	def __init__(self):
 		super(WebPageController,self).__init__()
 		
+		self.setVariable('c',self)
 		self.setVariable('res',view.Resource.Resource() )
 		
 		self.addPostProcess('readconfig')

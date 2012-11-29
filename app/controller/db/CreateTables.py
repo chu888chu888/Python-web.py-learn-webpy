@@ -66,3 +66,11 @@ class CreateTables(WebPageController):
 			`addtime` int(11) NOT NULL COMMENT '添加时间，时间戳',
 			PRIMARY KEY (`id`)
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
+		self.m_db.query('''CREATE TABLE IF NOT EXISTS `user_setting`(
+			`id` int(10) NOT NULL AUTO_INCREMENT,
+			`key` varchar(100) NOT NULL,
+			`uid` int(10) NOT NULL,
+			`value` varchar(100) NOT NULL,
+			PRIMARY KEY (`id`),
+			INDEX uk ( `key`, `uid` )
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
