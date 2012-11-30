@@ -16,7 +16,7 @@ class ShowCode(FrameController):
 		if i.has_key('sid') and i['sid'].isdigit():
 			condition['sm.id'] = int(i['sid'])
 		else:
-			self.setVariable('msg',u'参数无效:缺少sid参数')
+			self.setVariable('msg',u'参数无效:缺少sid参数或sid参数不是整数')
 			self.m_path = 'Error'
 			return
 		

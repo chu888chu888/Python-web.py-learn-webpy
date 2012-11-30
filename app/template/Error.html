@@ -1,5 +1,13 @@
 $def with(varDict)
 
+$varDict['res'].add('Error','css')
+
 <div class="error">
-	<div class="message">$varDict['msg']</div>
+	<div class="h1">访问$varDict['urlPath']时发生错误</div>
+	<div class="h2">
+		$if varDict.has_key('msg'):
+			$varDict['msg']
+		$else:
+			未知错误
+	</div>
 </div>

@@ -1,9 +1,9 @@
-from controller.base.AjaxController import AjaxController
+from controller.base.JsonController import JsonController
 
 import web
 import model
 
-class UserSetting(AjaxController):
+class UserSetting(JsonController):
 	def process(self):
 		i = web.input()
 		

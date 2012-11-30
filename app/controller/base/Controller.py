@@ -3,6 +3,7 @@
 import PathInvalid
 import view.View
 import web
+import json
 
 class Controller(object):
 	s_config = {
@@ -27,6 +28,8 @@ class Controller(object):
 		self.setView(aView)
 		
 	def run(self,renderObject):
+		self.setVariable('urlPath',self.m_urlPath)
+		
 		if self.isPermit():
 			self.process()
 		else:
@@ -42,7 +45,6 @@ class Controller(object):
 		pass
 		
 	def permissionDenied(self,msg=None):
-		self.setVariable('urlPath',self.m_urlPath)
 		self.m_path = 'PermissionDenied'
 		if msg:
 			self.setVariable('msg',msg)
@@ -61,6 +63,8 @@ class Controller(object):
 					renderObject,
 					self.m_variableDict
 				)
+		elif 'json' == self.m_renderType:
+			return json.dumps(self.m_variableDict)
 		else:
 			return self.m_renderType
 		
