@@ -2,6 +2,7 @@ $def with(varDict)
 
 $varDict['res'].add('frontpage','css')
 $varDict['res'].add('frontpage')
+$varDict['res'].add('common','css')
 
 <div class="body_block">
 	<div class="frontpage">
@@ -27,7 +28,7 @@ $varDict['res'].add('frontpage')
 				</div>
 				<div class="nav_content">
 					$if varDict['uid'] > 0 :
-						<div>欢迎您 $varDict['userinfo']['nickname']</div>
+						<div>欢迎您 $varDict['frame_userinfo']['nickname']</div>
 						<a href="/user/ChangePassword">修改密码</a>
 						<a href="/user/EditUserInfo">修改个人资料</a>
 						<a href="/user/Logout">退出</a>

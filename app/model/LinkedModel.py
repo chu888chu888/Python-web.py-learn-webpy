@@ -29,7 +29,7 @@ class LinkedModel(object):
 		self.__appendLinkedData('order',w)
 		return self
 		
-	def limit(self,length,offset=0):
+	def limit(self,length,offset=None):
 		self.__setLinkedData('limit',dict(length=length,offset=offset))
 		return self
 		
@@ -175,16 +175,18 @@ class LinkedModel(object):
 		
 	def __buildJoinString(self):
 		joinStringPartedList = list()
-		for join in self.__getLinkedData('join'):
-			joinStringParted = '%s join `%s`'%(
-				join['jointype'],
-				join['jointable'],
-			)
-			if join['alias']:
-				joinStringParted = joinStringParted + ' as %s'%join['alias']
-			if join['on']:
-				joinStringParted = joinStringParted + ' on (%s)'%join['on']
-			joinStringPartedList.append( joinStringParted )
+		joinData = self.__getLinkedData('join')
+		if joinData:
+			for join in joinData:
+				joinStringParted = '%s join `%s`'%(
+					join['jointype'],
+					join['jointable'],
+				)
+				if join['alias']:
+					joinStringParted = joinStringParted + ' as %s'%join['alias']
+				if join['on']:
+					joinStringParted = joinStringParted + ' on (%s)'%join['on']
+				joinStringPartedList.append( joinStringParted )
 		joinString = " \n".join( joinStringPartedList )
 		return joinString
 		
@@ -207,7 +209,10 @@ class LinkedModel(object):
 	def __buildLimitString(self):
 		limitData = self.__getLinkedData('limit')
 		if limitData:
-			limitString = 'limit %s,%s'%(limitData['offset'],limitData['length'])
+			if limitData['offset'] is None:
+				limitString = 'limit %s'%limitData['length']
+			else:
+				limitString = 'limit %s,%s'%(limitData['offset'],limitData['length'])
 		else:
 			limitString = 'limit 30'
 		return limitString
