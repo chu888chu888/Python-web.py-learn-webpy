@@ -16,7 +16,7 @@ class ShowCode(FrameController):
 		if i.has_key('sid') and i['sid'].isdigit():
 			condition['sm.id'] = int(i['sid'])
 		else:
-			self.setVariable('msg',u'参数无效')
+			self.setVariable('msg',u'参数无效:缺少sid参数')
 			self.m_path = 'Error'
 			return
 		
@@ -31,4 +31,21 @@ class ShowCode(FrameController):
 			.limit(length=1) \
 			.select()
 		
-		self.setVariable('aSubmitInfo',aSubmitIter[0])
+		aSubmitInfo = None
+		for i in aSubmitIter:
+			aSubmitInfo = i
+			self.setVariable('aSubmitInfo',aSubmitInfo)
+			
+		if not aSubmitInfo:
+			self.setVariable('msg',u'参数无效:没有与sid对应的内容')
+			self.m_path = 'Error'
+			return
+			
+		uid = -1
+		s = web.config._session
+		if hasattr(s,'userinfo'):
+			uid = s['userinfo']['uid']
+		if not self.checkPermitInSession('showAllCode') \
+			and uid != aSubmitInfo['ui.uid']:
+			self.permissionDenied('您无权查看此代码')
+			return

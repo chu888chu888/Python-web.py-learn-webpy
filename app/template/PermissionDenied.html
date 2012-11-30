@@ -1,4 +1,13 @@
 $def with(varDict)
 
-<div>您的无法访问:$varDict['urlPath']</div>
-<div>权限不足</div>
+$varDict['res'].add('PermissionDenied','css')
+
+<div class="permissionDenied">
+	<div class="h1">您无法访问:$varDict['urlPath']</div>
+	<div class="h2">
+		$if varDict.has_key('msg'):
+			$varDict['msg']
+		$else:
+			权限不足
+	</div>
+</div>

@@ -41,9 +41,11 @@ class Controller(object):
 	def process(self):
 		pass
 		
-	def permissionDenied(self):
+	def permissionDenied(self,msg=None):
 		self.setVariable('urlPath',self.m_urlPath)
 		self.m_path = 'PermissionDenied'
+		if msg:
+			self.setVariable('msg',msg)
 		
 	def render(self,renderObject):
 		if 'frameview' == self.m_renderType or 'view' == self.m_renderType:
@@ -79,17 +81,20 @@ class Controller(object):
 		
 	def isPermit(self):
 		if self.hasConfig('permission'):
-			s = web.config._session
-			if hasattr(s,'permissionList'):
-				permissionList = s['permissionList']
-				permission = self.config('permission')
-				if permission in permissionList:
-					return True
-				else:
-					return False
+			permission = self.config('permission')
+			return self.checkPermitInSession(permission)
+		return True
+		
+	def checkPermitInSession(self,permission):
+		s = web.config._session
+		if hasattr(s,'permissionList'):
+			permissionList = s['permissionList']
+			if permission in permissionList:
+				return True
 			else:
 				return False
-		return True
+		else:
+			return False
 		
 	@classmethod
 	def hasConfig(cls,key):
