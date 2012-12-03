@@ -49,6 +49,11 @@ class Controller(object):
 		if msg:
 			self.setVariable('msg',msg)
 		
+	def Error(self,msg=None):
+		self.m_path = 'Error'
+		if msg:
+			self.setVariable('msg',msg)
+		
 	def render(self,renderObject):
 		if 'frameview' == self.m_renderType or 'view' == self.m_renderType:
 			if not self.view():
