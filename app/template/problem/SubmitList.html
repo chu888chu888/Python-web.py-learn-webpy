@@ -36,7 +36,7 @@ $varDict['res'].add('problem/SubmitList','css')
 		</tr>
 	$for s in varDict['aSubmitIter']:
 		<tr>
-			<td>$s['sm.id']</td>
+			<td>$s['id']</td>
 			<td>
 				<a href="/problem/Detail?pnum=$s['pn.pnum']">
 					$s['pn.pnum']
@@ -47,11 +47,11 @@ $varDict['res'].add('problem/SubmitList','css')
 					$s['ui.nickname']
 				</a>
 			</td>
-			<td>$varDict['c'].ftime(s['sm.addtime'])</td>
-			<td>$s['sm.language']</td>
+			<td>$varDict['c'].ftime(s['addtime'])</td>
+			<td>$s['language']</td>
 			<td>
-				<a href="/problem/ShowCode?sid=$s['sm.id']">
-					$len(s['sm.code'])
+				<a href="/problem/ShowCode?sid=$s['id']">
+					$len(s['code'])
 				</a>B
 			</td>
 			<td>

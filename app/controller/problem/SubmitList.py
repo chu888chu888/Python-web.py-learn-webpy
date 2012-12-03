@@ -48,7 +48,7 @@ class SubmitList(FrameController):
 			.join('problem','pr','sm.pid = pr.pid') \
 			.join('problem_num','pn','pr.pid = pn.pid') \
 			.join('judge_result','jr','jr.sid=sm.id and jr.id = sm.judgeResultId') \
-			.order('`sm.addtime` DESC') \
+			.order('`addtime` DESC') \
 			.where(condition) \
 			.limit(length=num_per_page,offset=current_page*num_per_page) \
 			.select()
