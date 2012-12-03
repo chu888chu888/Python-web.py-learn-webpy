@@ -35,5 +35,5 @@ class FrameController(WebPageController.WebPageController):
 		self.setVariable('uid',uid)
 		
 		# userinfo
-		if hasattr(s,'frame_userinfo'):
+		if hasattr(s,'userinfo'):
 			self.setVariable('frame_userinfo',s['userinfo'])

@@ -36,7 +36,25 @@ $varDict['res'].add('jquery')
 				您就先假装这下面有很多很多内容吧
 			</div>
 			<div class="tab_page" tab_page="userinfo">
-				资料页
+				<div class="submitTotal">
+					共提交
+					<span class="content">
+						<a href="/problem/SubmitList?uid=$varDict['userinfo']['uid']">$varDict['submitCount']</a>
+					</span>
+					次
+				</div>
+				<div class="submitGroup">
+					其中
+					$for i in varDict['aSubmitGroupIter']:
+						$if i['jr.result']:
+							<div class="submit_$(i['jr.result'])">
+								返回$i['jr.result']
+								<span class="content">
+									<a href="/problem/SubmitList?uid=$varDict['userinfo']['uid']&result=$i['jr.result']">$i['COUNT(jr.id)']</a>
+								</span>
+								次
+							</div>
+				</div>
 			</div>
 			<div class="tab_page" tab_page="blog">
 				日志

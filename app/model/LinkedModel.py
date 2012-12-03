@@ -9,6 +9,13 @@ class LinkedModel(object):
 		# linked data
 		self.__clearLinkedData()
 		
+	def field(self,column,table=None):
+		self.__appendLinkedData('field',dict(
+			column=column,
+			table=table
+		))
+		return self
+		
 	def alias(self,a):
 		self.__setLinkedData('alias',a)
 		return self
@@ -45,6 +52,10 @@ class LinkedModel(object):
 		)
 		return self
 		
+	def group(self,g):
+		self.__appendLinkedData('group',g)
+		return self
+		
 	def select(self):
 		fieldString = self.__buildFieldString()
 		tableString = self.__buildTableString()
@@ -52,12 +63,14 @@ class LinkedModel(object):
 		whereString = self.__buildWhereString()
 		orderString = self.__buildOrderString()
 		limitString = self.__buildLimitString()
-			
-		queryString = "select \n%s \nfrom %s \n%s \nwhere %s \n%s \n%s"%(
+		groupString = self.__buildGroupString()
+		
+		queryString = "select\n%s\nfrom %s\n%s\nwhere %s\n%s\n%s\n%s"%(
 			fieldString,
 			tableString,
 			joinString,
 			whereString,
+			groupString,
 			orderString,
 			limitString
 		)
@@ -136,6 +149,26 @@ class LinkedModel(object):
 		return tableAliasMap
 		
 	def __buildFieldString(self):
+		fieldData = self.__getLinkedData('field')
+		if fieldData:
+			fieldStringPartedList = list()
+			for f in fieldData:
+				if f['table']:
+					fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
+						f['table'],
+						f['column'],
+						f['table'],
+						f['column']
+					)
+				else:
+					fieldStringParted = f['column']
+				fieldStringPartedList.append(fieldStringParted)
+			fieldString = ',\n'.join(fieldStringPartedList)
+		else:
+			fieldString = self.__buildFieldStringByColumn()
+		return fieldString
+	
+	def __buildFieldStringByColumn(self):
 		# table and column
 		tableNameList = self.__getTableNameList()
 		columnNameListMap = dict()
@@ -224,5 +257,13 @@ class LinkedModel(object):
 			else:
 				limitString = 'limit %s,%s'%(limitData['offset'],limitData['length'])
 		else:
-			limitString = 'limit 30'
+			limitString = ''
 		return limitString
+		
+	def __buildGroupString(self):
+		groupData = self.__getLinkedData('group')
+		if groupData:
+			groupString = 'group by '+','.join( groupData )
+		else:
+			groupString = ''
+		return groupString

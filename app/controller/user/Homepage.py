@@ -26,3 +26,21 @@ class Homepage(FrameController):
 		if aUserinfo is None:
 			self.Error(u'参数无效:没有与uid对应的用户')
 			return
+			
+		aSubmitModel = model.LinkedModel('submit')
+		
+		nSubmitCount = aSubmitModel \
+			.where({'uid':uid}) \
+			.count()
+		self.setVariable('submitCount',nSubmitCount)
+		
+		aSubmitGroupIter = aSubmitModel \
+			.alias('sm') \
+			.join('judge_result','jr','jr.sid=sm.id and jr.id = sm.judgeResultId') \
+			.where({'sm.uid':uid}) \
+			.field('COUNT(jr.id)') \
+			.field('result','jr') \
+			.group('jr.result') \
+			.select()
+		
+		self.setVariable('aSubmitGroupIter',aSubmitGroupIter)
