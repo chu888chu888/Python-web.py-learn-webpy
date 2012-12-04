@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import view.Resource
+
 class View(object):
 	def __init__(self):
 		self.m_templatePath = ''
 		self.m_dictSubView = dict()
 		self.m_parentView = None
+		self.__resource = view.Resource.Resource()
 		
 		# a cache variable
 		self.m_rootView = None
@@ -20,6 +23,9 @@ class View(object):
 		varDict['temp'] = dict()
 		for name in subViewRenderResult:
 			varDict['temp'][name] = subViewRenderResult[name]
+		
+		varDict['res'] = self.__resource
+		varDict['v'] = self
 		ret = r( varDict )
 		del(varDict['temp'])
 		
@@ -53,3 +59,11 @@ class View(object):
 				return self.m_rootView
 			else:
 				return self
+		
+	def resourceIterator(self):
+		for i in self.__resource:
+			yield i
+		for name in self.m_dictSubView:
+			aSubView = self.m_dictSubView[name]
+			for i in aSubView.resourceIterator():
+				yield i

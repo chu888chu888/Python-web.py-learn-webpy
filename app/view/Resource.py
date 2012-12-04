@@ -20,6 +20,4 @@ class Resource(object):
 		self.__resList.append(dict(name=name,type=type,path=path))
 		
 	def __iter__(self):
-		# 为了使父view的资源代码先输出
-		# 这里返回反向迭代器
-		return reversed(self.__resList)
+		return iter(self.__resList)

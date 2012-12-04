@@ -6,7 +6,7 @@ $def with(varDict)
     <link rel="icon" href="/static/image/breaking.ico" mce_href="/static/image/breaking.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/static/image/breaking.ico" mce_href="/static/image/breaking.ico" type="image/x-icon">
     <title>$varDict['title']</title>
-    $for r in varDict['res']:
+    $for r in varDict['v'].resourceIterator():
       $if 'js' == r['type']:
         <script language="javascript" src="$r['path']"></script>
       $elif 'css' == r['type']:

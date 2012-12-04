@@ -2,7 +2,6 @@
 
 import Controller
 import view.View
-import view.Resource
 import web
 import model.Model
 
@@ -14,7 +13,6 @@ class WebPageController(Controller.Controller):
 		super(WebPageController,self).__init__()
 		
 		self.setVariable('c',self)
-		self.setVariable('res',view.Resource.Resource() )
 		
 		self.addPostProcess('readconfig')
 	
