@@ -1,0 +1,16 @@
+.discuss_list .list_container .author,
+.discuss_list .list_container .title,
+.discuss_list .list_container .reply_count,
+.discuss_list .list_container .last_reply{
+	display: inline-block;
+	width: 100px;
+}
+.discuss_list .list_container .title{
+	width: 300px;
+}
+.discuss_list .list_container .reply_count{
+	width: 50px;
+}
+.discuss_list .button_links{
+	padding-top: 30px;
+}

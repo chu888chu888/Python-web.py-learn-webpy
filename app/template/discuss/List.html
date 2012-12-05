@@ -1,0 +1,37 @@
+$def with(v)
+
+$v['res'].add('discuss/list','css')
+
+<div class="discuss_list">
+	<div class="list_container">
+		<div class="header">
+			<span class="author">作者</span>
+			<span class="title">标题</span>
+			<span class="reply_count">回复</span>
+			<span class="last_reply">最后回复</span>
+		</div>
+		<div class="list">
+			$for i in v['iter']:
+				<div class="item">
+					<span class="author">
+						<a href="/user/Homepage?uid=$i['ui.uid']">
+							$i['ui.nickname']
+						</a>
+					</span>
+					<span class="title">
+						<a href="/discuss/Topic?id=$i['id']">
+							$i['title']
+						</a>
+					</span>
+					<span class="reply_count">37</span>
+					<span class="last_reply">
+						<span class="time">12:11</span>
+						<span class="user">刘项2</span>
+					</span>
+				</div>
+		</div>
+	</div>
+	<div class="button_links">
+		<a href="/discuss/PostTopic?pnum=$v['pnum']">发表新主题</a>
+	</div>
+</div>

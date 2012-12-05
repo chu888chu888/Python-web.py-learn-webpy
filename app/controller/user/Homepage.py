@@ -5,6 +5,9 @@ import web
 import model
 
 class Homepage(FrameController):
+	s_config = {
+		'title':u'个人主页',
+	}
 	def process(self):
 		i = web.input()
 		

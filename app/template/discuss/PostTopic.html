@@ -1,0 +1,36 @@
+$def with(v)
+
+$v['res'].add('discuss/posttopic','css')
+
+$v['res'].add('jquery')
+$v['res'].add('jdmd_widget')
+$v['res'].add('jdmd_widget','css')
+
+$v['res'].add('discuss/posttopic')
+
+<div class="discuss_posttopic">
+	<div class="page_title">
+		发表新主题
+	</div>
+	<div class="form_block">
+		<form action='/discuss/PostTopicResult' method='post' onsubmit="posttopic.submit(this);return false;">
+			<input type="hidden" name="pnum" value="$v['pnum']" />
+			<div class="input_title">
+				<span class="h">题号</span>
+				<span class="c">$v['pnum']</span>
+			</div>
+			<div class="input_title">
+				<span class="h">标题</span>
+				<span class="c"><input name="title" class="jdmd_input" validate="notempty" /></span>
+			</div>
+			<div class="input_content">
+				<span class="h">内容</span>
+				<span class="c"><textarea name="text" class="jdmd_input" validate="notempty"></textarea></span>
+			</div>
+			<div class="input_submit">
+				<span class="h"></span>
+				<span class="c"><input type="submit" class="jdmd_validate_submit" /></span>
+			</div>
+		</form>
+	</div>
+</div>

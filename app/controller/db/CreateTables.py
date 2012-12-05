@@ -74,3 +74,25 @@ class CreateTables(WebPageController):
 			PRIMARY KEY (`id`),
 			INDEX uk ( `key`, `uid` )
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
+		self.m_db.query('''CREATE TABLE IF NOT EXISTS `discuss_topic`(
+			`id` int(10) NOT NULL AUTO_INCREMENT,
+			`pid` int(10) NOT NULL COMMENT '题目id',
+			`uid` int(10) NOT NULL COMMENT '用户id',
+			`ctime` int(11) NOT NULL COMMENT '创建时间',
+			`mtime` int(11) NOT NULL COMMENT '修改时间',
+			`rtime` int(11) NOT NULL COMMENT '最后回复时间',
+			`rid` int(10) NOT NULL COMMENT '最后回复id',
+			`title` varchar(100) NOT NULL COMMENT '标题',
+			`text` TEXT NOT NULL COMMENT '正文',
+			PRIMARY KEY (`id`)
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
+		self.m_db.query('''CREATE TABLE IF NOT EXISTS `discuss_reply`(
+			`id` int(10) NOT NULL AUTO_INCREMENT,
+			`tid` int(10) NOT NULL COMMENT '主题id',
+			`uid` int(10) NOT NULL COMMENT '用户id',
+			`rid` int(10) NOT NULL COMMENT '回复某个回复',
+			`ctime` int(11) NOT NULL COMMENT '创建时间',
+			`mtime` int(11) NOT NULL COMMENT '修改时间',
+			`text` TEXT NOT NULL COMMENT '正文',
+			PRIMARY KEY (`id`)
+			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')

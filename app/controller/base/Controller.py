@@ -16,6 +16,7 @@ class Controller(object):
 		self.m_path = modulePath[ len(prefix) : ]
 		
 		self.m_renderType = 'frameview'
+		self.__status = 'ok'
 		
 		self.m_view = None
 		
@@ -28,8 +29,6 @@ class Controller(object):
 		self.setView(aView)
 		
 	def run(self,renderObject):
-		self.setVariable('urlPath',self.m_urlPath)
-		
 		if self.isPermit():
 			self.process()
 		else:
@@ -46,11 +45,13 @@ class Controller(object):
 		
 	def permissionDenied(self,msg=None):
 		self.m_path = 'PermissionDenied'
+		self.__status = 'permission denied'
 		if msg:
 			self.setVariable('msg',msg)
 		
 	def Error(self,msg=None):
 		self.m_path = 'Error'
+		self.__status = 'error'
 		if msg:
 			self.setVariable('msg',msg)
 		
@@ -58,6 +59,9 @@ class Controller(object):
 		if 'frameview' == self.m_renderType or 'view' == self.m_renderType:
 			if not self.view():
 				self.buildView()
+			
+			# 在 json 请求中不需要此参数
+			self.setVariable('urlPath',self.m_urlPath)
 			if 'frameview' == self.m_renderType:
 				return self.view().rootView().render(
 					renderObject,
@@ -69,6 +73,10 @@ class Controller(object):
 					self.m_variableDict
 				)
 		elif 'json' == self.m_renderType:
+			if self.__status == 'ok':
+				self.setVariable('result',True)
+			else:
+				self.setVariable('result',False)
 			return json.dumps(self.m_variableDict)
 		else:
 			return self.m_renderType
