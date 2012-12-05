@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import db.DbCreator
 import hashlib
 
@@ -14,6 +16,18 @@ class LinkedModel(object):
 			column=column,
 			table=table
 		))
+		return self
+		
+	def reflectField(self,r):
+		'''
+		True : 强制反射所有表
+		False : 强制不反射任何表
+		None/'auto' : 如果有field参数，则不反射；如果没有field参数，则反射
+		list() : 仅反射列表中指定的表，表名必须使用全名
+		
+		默认为None
+		'''
+		self.__setLinkedData('reflectField',r)
 		return self
 		
 	def alias(self,a):
@@ -149,28 +163,51 @@ class LinkedModel(object):
 		return tableAliasMap
 		
 	def __buildFieldString(self):
+		reflectFieldData = self.__getLinkedData('reflectField')
 		fieldData = self.__getLinkedData('field')
-		if fieldData:
-			fieldStringPartedList = list()
-			for f in fieldData:
-				if f['table']:
-					fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
-						f['table'],
-						f['column'],
-						f['table'],
-						f['column']
-					)
-				else:
-					fieldStringParted = f['column']
-				fieldStringPartedList.append(fieldStringParted)
-			fieldString = ',\n'.join(fieldStringPartedList)
-		else:
-			fieldString = self.__buildFieldStringByColumn()
+		
+		if reflectFieldData is None \
+			or reflectFieldData == 'auto':
+			if fieldData:
+				fieldList = self.__buildFieldListByFieldData( fieldData )
+			else:
+				fieldList = self.__buildFieldListByColumn()
+		elif reflectFieldData == True:
+			fieldList = self.__buildFieldListByColumn()
+			if fieldData:
+				fieldList.extend( self.__buildFieldListByFieldData( fieldData ) )
+		elif reflectFieldData == False:
+			if fieldData:
+				fieldList = self.__buildFieldListByFieldData( fieldData )
+			else:
+				fieldList = list()
+		elif isinstance( reflectFieldData , list ):
+			fieldList = self.__buildFieldListByColumn(reflectFieldData)
+			if fieldData:
+				fieldList.extend( self.__buildFieldListByFieldData( fieldData ) )
+			
+		fieldString = ',\n'.join(fieldList)
 		return fieldString
-	
-	def __buildFieldStringByColumn(self):
+		
+	def __buildFieldListByFieldData(self,fieldData):
+		fieldStringPartedList = list()
+		for f in fieldData:
+			if f['table']:
+				fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
+					f['table'],
+					f['column'],
+					f['table'],
+					f['column']
+				)
+			else:
+				fieldStringParted = f['column']
+			fieldStringPartedList.append(fieldStringParted)
+		return fieldStringPartedList
+		
+	def __buildFieldListByColumn(self,tableNameList=None):
 		# table and column
-		tableNameList = self.__getTableNameList()
+		if tableNameList is None:
+			tableNameList = self.__getTableNameList()
 		columnNameListMap = dict()
 		for tableName in tableNameList:
 			columnNameListMap[ tableName ] = self.__getColumnList(tableName)
@@ -203,9 +240,7 @@ class LinkedModel(object):
 				)
 				
 				fieldStringPartedList.append( fieldStringParted )
-				
-		fieldString = ",\n".join(fieldStringPartedList)
-		return fieldString
+		return fieldStringPartedList
 		
 	def __buildTableString(self):
 		aliasData = self.__getLinkedData('alias')

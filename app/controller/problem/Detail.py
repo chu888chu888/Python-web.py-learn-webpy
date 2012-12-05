@@ -9,18 +9,32 @@ class Detail(FrameController):
 	def process(self):
 		i = web.input()
 		
-		pnum = int(i['pnum'])
+		pnum = -1
+		if i.has_key('pnum') and i['pnum'].isdigit():
+			pnum = int(i['pnum'])
+		else:
+			self.Error(u'参数无效:缺少pnum参数或pnum参数不是整数')
+			return
 		
-		aProblemModel = model.Model.Model('problem')
-		aProblemIter = aProblemModel.query(
-			'select * , u.nickname as author from problem_num as pn \
-			left join problem as pr on pn.pid = pr.pid \
-			left join userinfo as u on pr.authorid=u.uid \
-			where pn.pnum=$pnum',
-			dict(pnum=pnum)
-		)
-		problemInfo = aProblemIter[0]
+		aProblemModel = model.LinkedModel('problem')
+		aProblemIter = aProblemModel \
+			.alias('pr') \
+			.join('problem_num','pn','pn.pid = pr.pid') \
+			.join('userinfo','ui','pr.authorid = ui.uid') \
+			.join('discuss_topic','dt','dt.pid = pr.pid') \
+			.where({'pn.pnum':pnum}) \
+			.group('dt.pid') \
+			.field('count(dt.id) as `dt.count`') \
+			.reflectField(['problem_num','userinfo']) \
+			.select()
 		
-		self.setConfig('title',u'%d -- %s'%(problemInfo['pnum'],problemInfo['title']))
+		problemInfo = None
+		for i in aProblemIter:
+			problemInfo = i
+		if problemInfo is None:
+			self.Error(u'参数无效:没有与pnum对应的题目')
+			return
+		
+		self.setConfig('title',u'%d -- %s'%(problemInfo['pn.pnum'],problemInfo['title']))
 		
 		self.setVariable('problemInfo',problemInfo)

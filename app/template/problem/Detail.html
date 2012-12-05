@@ -47,12 +47,12 @@ $varDict['res'].add('problem/Detail','css')
 		</div>
 		<div class="author">
 			<div class="itemname">作者</div>
-			<div class="content">$varDict['problemInfo']['author']</div>
+			<div class="content">$varDict['problemInfo']['ui.nickname']</div>
 		</div>
 	</div>
 	<div class="bottom_link">
 		<a href="/problem/Rank">本题统计与排名</a>
-		<a href="/problem/Submit?pnum=$varDict['problemInfo']['pnum']">提交代码</a>
-		<a href="/discuss/List?pnum=$varDict['problemInfo']['pnum']">讨论区</a>
+		<a href="/problem/Submit?pnum=$varDict['problemInfo']['pn.pnum']">提交代码</a>
+		<a href="/discuss/List?pnum=$varDict['problemInfo']['pn.pnum']">讨论区($varDict['problemInfo']['dt.count'])</a>
 	</div>
 </div>
