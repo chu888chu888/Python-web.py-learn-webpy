@@ -25,7 +25,7 @@ class Detail(FrameController):
 			.where({'pn.pnum':pnum}) \
 			.group('dt.pid') \
 			.field('count(dt.id) as `dt.count`') \
-			.reflectField(['problem_num','userinfo']) \
+			.reflectField(['problem','problem_num','userinfo']) \
 			.select()
 		
 		problemInfo = None

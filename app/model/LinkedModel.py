@@ -127,6 +127,7 @@ class LinkedModel(object):
 		
 	def __getTableNameList(self):
 		tableNameList = list()
+		tableNameList.append( self.__tableName )
 		
 		joinData = self.__getLinkedData('join')
 		if joinData:
@@ -217,27 +218,22 @@ class LinkedModel(object):
 		
 		# fieldString
 		fieldStringPartedList = list()
-		
-		# this table
-		for columnName in self.__getColumnList( self.__tableName ):
-			fieldStringParted = '`%s`.`%s`'%(
-				tableAliasMap[ self.__tableName ],
-				columnName
-			)
-			
-			fieldStringPartedList.append( fieldStringParted )
-		
-		# join table
 		for tableName,columnNameList in columnNameListMap.iteritems():
 			tableAlias = tableAliasMap[ tableName ]
 			for columnName in columnNameList:
 				columnAlias = columnName
-				fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
-					tableAlias,
-					columnName,
-					tableAlias,
-					columnAlias
-				)
+				if tableName == self.__tableName :
+					fieldStringParted = '`%s`.`%s`'%(
+						tableAliasMap[ self.__tableName ],
+						columnName
+					)
+				else:
+					fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
+						tableAlias,
+						columnName,
+						tableAlias,
+						columnAlias
+					)
 				
 				fieldStringPartedList.append( fieldStringParted )
 		return fieldStringPartedList
