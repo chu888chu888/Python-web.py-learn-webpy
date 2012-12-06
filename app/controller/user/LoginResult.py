@@ -7,18 +7,53 @@ class LoginResult(FrameController):
 	def process(self):
 		i = web.input()
 		
+		# redirect
+		if 'redirect' in i:
+			redirect = i['redirect']
+		else:
+			redirect = '/'
+		
+		if 'loginname' in i:
+			loginname = i['loginname']
+		else:
+			self.Error(u'参数无效:缺少loginname参数')
+			return
+		
+		if 'password' in i:
+			password = i['password']
+		else:
+			self.Error(u'参数无效:缺少password参数')
+			return
+		
 		m = model.user.UserLogin.UserLogin()
-		r = m.select({'loginname':i.loginname,'password':m.str_md5(i.password)})
+		r = m.select({'loginname':loginname})
 		
-		l = r.list()
+		loginResult = False
+		uid = -1
+		md5_password = m.str_md5(password)
+		for it in r:
+			if it['password'] == md5_password:
+				loginResult = True
+				uid = it['uid']
 		
-		if len(l) > 0:
+		# variable
+		self.setVariable('loginResult',loginResult)
+		
+		# redirect
+		if loginResult:
+			self.setVariable('redirect',redirect)
+		else:
+			self.setVariable('redirect','/user/Login?redirect=%s'%web.urlquote(redirect))
+		
+		# header for client request
+		if loginResult:
 			web.header('Login-Result','success')
-			
-			self.setVariable('msg','登录成功')
-			self.setVariable('loginresult',True)
+		else:
+			web.header('Login-Result','fail')
+		
+		# session
+		if loginResult:
 			s = web.config._session
-			uid = l[0]['uid']
 			s['uid'] = uid
 			
 			aPermissionModel = model.Model.Model('permission')
@@ -32,13 +67,3 @@ class LoginResult(FrameController):
 			aUserinfoModel = model.Model.Model('userinfo')
 			for userinfo in aUserinfoModel.select({'uid':uid}) :
 				s['userinfo'] = userinfo
-		else:
-			web.header('Login-Result','fail')
-			self.setVariable('msg','登录失败')
-			self.setVariable('loginresult',False)
-		
-		# redirect
-		if hasattr(i,'redirect'):
-			self.setVariable('redirect',i.redirect)
-		else:
-			self.setVariable('redirect','/')

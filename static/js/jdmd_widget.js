@@ -9,6 +9,9 @@ jdmd_widget.init = function(){
 			return false;
 		}
 	});
+	jQuery('.jdmd_redirect').each(function(){
+		jdmd_widget.redirect(this);
+	});
 }
 jdmd_widget.validate_and_error = function(o){
 	var rst = jdmd_widget.validate(o);
@@ -89,6 +92,26 @@ jdmd_widget.validate_and_error_all = function(o){
 		}
 	});
 	return rtn;
+}
+
+jdmd_widget.redirect=function(o){
+	jobj = jQuery(o);
+	var time = jobj.attr('value');
+	var redirect = jobj.attr('redirect');
+	jobj.html(time);
+	
+	var timer = setInterval(
+		function(){
+			--time;
+			jobj.html(time);
+			
+			if( time <= 0 ){
+				clearInterval( timer );
+				window.location = redirect;
+			}
+		},
+		1000
+	);
 }
 
 if( jQuery != undefined ){

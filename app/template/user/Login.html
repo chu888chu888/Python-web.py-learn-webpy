@@ -1,17 +1,23 @@
-$def with(varDict)
+$def with(v)
 
-<h1>登录</h1>
-<form action="/user/LoginResult?xxx=ooo" method="post">
-	<table>
-		<tr>
-			<td>登录名</td>
-			<td><input name="loginname" /></td>
-		</tr>
-		<tr>
-			<td>密码</td>
-			<td><input type="password" name="password" /></td>
-		</tr>
-	</table>
-	<input type="submit" value="登录" />
-	<a href="/user/Register">注册</a>
-</form>
+$v['res'].add('jquery')
+$v['res'].add('jdmd_widget')
+$v['res'].add('jdmd_widget','css')
+
+<div class="user_login common_center_block">
+	<div class="common_page_title">登录</div>
+	<form action="/user/LoginResult?redirect=$v['redirect_quote']" method="post">
+		<table>
+			<tr>
+				<td>登录名</td>
+				<td><input name="loginname" class="jdmd_input" validate="notempty" /></td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><input type="password" name="password" class="jdmd_input" validate="notempty" /></td>
+			</tr>
+		</table>
+		<input type="submit" value="登录" class="jdmd_validate_submit" />
+		<a href="/user/Register?redirect=$v['redirect_quote']">注册</a>
+	</form>
+</div>

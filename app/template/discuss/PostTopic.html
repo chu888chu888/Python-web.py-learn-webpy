@@ -8,10 +8,8 @@ $v['res'].add('jdmd_widget','css')
 
 $v['res'].add('discuss/posttopic')
 
-<div class="discuss_posttopic">
-	<div class="page_title">
-		发表新主题
-	</div>
+<div class="discuss_posttopic common_center_block">
+	<div class="common_page_title">发表新主题</div>
 	<div class="form_block">
 		<form action='/discuss/PostTopicResult' method='post' onsubmit="posttopic.submit(this);return false;">
 			<input type="hidden" name="pnum" value="$v['pnum']" />

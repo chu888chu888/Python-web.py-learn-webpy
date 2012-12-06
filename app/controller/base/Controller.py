@@ -62,6 +62,9 @@ class Controller(object):
 			
 			# 在 json 请求中不需要此参数
 			self.setVariable('urlPath',self.m_urlPath)
+			self.setVariable('url',web.ctx.fullpath)
+			self.setVariable('urlquote',web.urlquote( web.ctx.fullpath ) )
+			
 			if 'frameview' == self.m_renderType:
 				return self.view().rootView().render(
 					renderObject,

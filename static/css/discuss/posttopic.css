@@ -1,13 +1,3 @@
-.discuss_posttopic{
-	width: 300px;
-	margin: 0 auto;
-}
-.discuss_posttopic .page_title{
-	color: red;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-}
 .discuss_posttopic .form_block .h{
 	font-size: 16px;
 	color: blue;
