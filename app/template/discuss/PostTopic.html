@@ -15,7 +15,12 @@ $v['res'].add('discuss/posttopic')
 			<input type="hidden" name="pnum" value="$v['pnum']" />
 			<div class="input_title">
 				<span class="h">题号</span>
-				<span class="c">$v['pnum']</span>
+				<span class="c">
+					$if v['pnum'] > 0:
+						$v['pnum']
+					$else:
+						无
+				</span>
 			</div>
 			<div class="input_title">
 				<span class="h">标题</span>

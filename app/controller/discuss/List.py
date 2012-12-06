@@ -12,11 +12,10 @@ class List(FrameController):
 		i = web.input()
 		
 		pnum = -1
+		where = dict()
 		if i.has_key('pnum') and i['pnum'].isdigit():
 			pnum = int(i['pnum'])
-		else:
-			self.Error(u'参数无效:缺少pnum参数或pnum参数不是整数')
-			return
+			where['pn.pnum'] = pnum
 		
 		self.setVariable('pnum',pnum)
 		
@@ -24,6 +23,8 @@ class List(FrameController):
 		aIter = aDiscussModel \
 			.alias('dt') \
 			.join('userinfo','ui','dt.uid = ui.uid') \
+			.join('problem_num','pn','dt.pid = pn.pid') \
+			.where(where) \
 			.select()
 		
 		self.setVariable('iter',aIter)

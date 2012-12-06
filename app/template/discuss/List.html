@@ -6,6 +6,7 @@ $v['res'].add('discuss/list','css')
 	<div class="list_container">
 		<div class="header">
 			<span class="author">作者</span>
+			<span class="pnum">题号</span>
 			<span class="title">标题</span>
 			<span class="reply_count">回复</span>
 			<span class="last_reply">最后回复</span>
@@ -17,6 +18,12 @@ $v['res'].add('discuss/list','css')
 						<a href="/user/Homepage?uid=$i['ui.uid']">
 							$i['ui.nickname']
 						</a>
+					</span>
+					<span class="pnum">
+						$if i['pn.pnum'] is None:
+							无
+						$else:
+							<a href="/problem/Detail?pnum=$i['pn.pnum']"/>$i['pn.pnum']</a>
 					</span>
 					<span class="title">
 						<a href="/discuss/Topic?id=$i['id']">
@@ -33,6 +40,7 @@ $v['res'].add('discuss/list','css')
 	</div>
 	<div class="button_links">
 		<a href="/discuss/PostTopic?pnum=$v['pnum']">发表新主题</a>
-		<a href="/problem/Detail?pnum=$v['pnum']">返回题目</a>
+		$if v['pnum'] >= 0 :
+			<a href="/problem/Detail?pnum=$v['pnum']">返回题目</a>
 	</div>
 </div>

@@ -14,9 +14,6 @@ class PostTopic(FrameController):
 		pnum = -1
 		if i.has_key('pnum') and i['pnum'].isdigit():
 			pnum = int(i['pnum'])
-		else:
-			self.Error(u'参数无效:缺少pnum参数或pnum参数不是整数')
-			return
 		
 		self.setVariable('pnum',pnum)
 		
