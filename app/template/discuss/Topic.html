@@ -1,0 +1,33 @@
+$def with(v)
+
+$v['res'].add('discuss/topic','css')
+$v['res'].add('discuss/topic')
+
+<div class="discuss_topic">
+	<div class="topic_headblock">
+		<span class="topic_title">$v['topicInfo']['title']</span>
+	</div>
+	<div class="building">
+		<div class="floor">
+			<div class="common_layout_column floor_left_column">
+				<div class="user_panel">
+					<div class="avatar_block">
+						<img class="avatar" src="${v['topicInfo']['ui.avatar'] or '/static/image/meteor.jpg'}" alt="avatar" />
+					</div>
+					<div class="nickname">$v['topicInfo']['ui.nickname']</div>
+				</div>
+			</div>
+			<div class="common_layout_column floor_right_column">
+				<div class="floor_text">$v['topicInfo']['text']</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="reply_block">
+		<div class="h">发表回复</div>
+		<div>
+			<textarea id="reply_content" class="reply_content" placeholder="请输入回复内容..."></textarea>
+		</div>
+		<button onclick="topic.sendReply()">发送</button>
+	</div>
+</div>

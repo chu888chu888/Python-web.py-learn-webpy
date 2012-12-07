@@ -19,6 +19,6 @@
 	overflow: hidden;
 }
 .user_homepage .avatar_block .avatar{
-	min-width: 200px;
-	min-height: 300px;
+	max-width: 200px;
+	max-height: 300px;
 }
