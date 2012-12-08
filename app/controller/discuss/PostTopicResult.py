@@ -53,7 +53,6 @@ class PostTopicResult(JsonController):
 			pid = pid,
 			uid = uid,
 			ctime = int( time.time() ),
-			mtime = int( time.time() ),
 			rtime = int( time.time() ),
 			title = title,
 			text = text

@@ -1,7 +1,13 @@
 $def with(v)
 
+$v['res'].add('jquery')
+
 $v['res'].add('discuss/topic','css')
 $v['res'].add('discuss/topic')
+
+<script type="text/javascript">
+var topic_id = $v['topicInfo']['id'];
+</script>
 
 <div class="discuss_topic">
 	<div class="topic_headblock">
@@ -22,12 +28,27 @@ $v['res'].add('discuss/topic')
 			</div>
 			<div class="clear"></div>
 		</div>
+		$for reply in v['aReplyIter']:
+			<div class="floor">
+				<div class="common_layout_column floor_left_column">
+					<div class="user_panel">
+						<div class="avatar_block">
+							<img class="avatar" src="${reply['ui.avatar'] or '/static/image/meteor.jpg'}" alt="avatar" />
+						</div>
+						<div class="nickname">$reply['ui.nickname']</div>
+					</div>
+				</div>
+				<div class="common_layout_column floor_right_column">
+					<div class="floor_text">$reply['text']</div>
+				</div>
+				<div class="clear"></div>
+			</div>
 	</div>
 	<div class="reply_block">
 		<div class="h">发表回复</div>
 		<div>
 			<textarea id="reply_content" class="reply_content" placeholder="请输入回复内容..."></textarea>
 		</div>
-		<button onclick="topic.sendReply()">发送</button>
+		<button id="reply_button" onclick="topic.sendReply()">发送</button>
 	</div>
 </div>

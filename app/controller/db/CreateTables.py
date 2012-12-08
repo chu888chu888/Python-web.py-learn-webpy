@@ -79,7 +79,6 @@ class CreateTables(WebPageController):
 			`pid` int(10) NOT NULL COMMENT '题目id',
 			`uid` int(10) NOT NULL COMMENT '用户id',
 			`ctime` int(11) NOT NULL COMMENT '创建时间',
-			`mtime` int(11) NOT NULL COMMENT '修改时间',
 			`rtime` int(11) NOT NULL COMMENT '最后回复时间',
 			`rid` int(10) NOT NULL COMMENT '最后回复id',
 			`title` varchar(100) NOT NULL COMMENT '标题',
@@ -92,7 +91,6 @@ class CreateTables(WebPageController):
 			`uid` int(10) NOT NULL COMMENT '用户id',
 			`rid` int(10) NOT NULL COMMENT '回复某个回复',
 			`ctime` int(11) NOT NULL COMMENT '创建时间',
-			`mtime` int(11) NOT NULL COMMENT '修改时间',
 			`text` TEXT NOT NULL COMMENT '正文',
 			PRIMARY KEY (`id`)
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')

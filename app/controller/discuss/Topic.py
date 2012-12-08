@@ -38,3 +38,12 @@ class Topic(FrameController):
 			return
 		
 		self.setVariable('topicInfo',aTopicInfo)
+		
+		aReplyModel = model.LinkedModel('discuss_reply')
+		aReplyIter = aReplyModel \
+			.alias('dr') \
+			.join('userinfo','ui','dr.uid = ui.uid') \
+			.where({'dr.tid':tid}) \
+			.select()
+		
+		self.setVariable('aReplyIter',aReplyIter)
