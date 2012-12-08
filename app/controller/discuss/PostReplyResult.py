@@ -16,11 +16,11 @@ class PostReplyResult(JsonController):
 			self.Error(u'params error:tid')
 			return
 		
-		rid = -1
-		if 'rid' in i and util.funs.isInt(i['rid']):
-			rid = int(i['rid'])
+		reply_to_id = -1
+		if 'reply_to_id' in i and util.funs.isInt(i['reply_to_id']):
+			reply_to_id = int(i['reply_to_id'])
 		else:
-			self.Error(u'params error:rid')
+			self.Error(u'params error:reply_to_id')
 			return
 		
 		text = ''
@@ -39,10 +39,17 @@ class PostReplyResult(JsonController):
 			return
 		
 		aReplyModel = model.Model.Model('discuss_reply')
-		aReplyModel.insert(dict(
+		reply_id = aReplyModel.insert(dict(
 			tid = tid,
 			uid = uid,
-			rid = rid,
+			reply_to_id = reply_to_id,
 			ctime = int( time.time() ),
 			text = text
 		))
+		
+		aTopicModel = model.Model.Model('discuss_topic')
+		aTopicModel.update(
+			'id = $id',
+			dict(id=tid),
+			last_rid = reply_id
+		)

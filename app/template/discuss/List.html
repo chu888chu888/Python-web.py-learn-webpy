@@ -12,28 +12,34 @@ $v['res'].add('discuss/list','css')
 			<span class="last_reply">最后回复</span>
 		</div>
 		<div class="list">
-			$for i in v['iter']:
+			$for ic,ir in v['zip'](v['iter'],v['riter']):
+				$if ic['id'] != ir['id']:
+					id not same in zip:($ic['id']/$ir['id'])
 				<div class="item">
 					<span class="author">
-						<a href="/user/Homepage?uid=$i['ui.uid']">
-							$i['ui.nickname']
+						<a href="/user/Homepage?uid=$ic['ui.uid']">
+							$ic['ui.nickname']
 						</a>
 					</span>
 					<span class="pnum">
-						$if i['pn.pnum'] is None:
+						$if ic['pn.pnum'] is None:
 							无
 						$else:
-							<a href="/problem/Detail?pnum=$i['pn.pnum']"/>$i['pn.pnum']</a>
+							<a href="/problem/Detail?pnum=$i['pn.pnum']"/>$ic['pn.pnum']</a>
 					</span>
 					<span class="title">
-						<a href="/discuss/Topic?id=$i['id']">
-							$i['title']
+						<a href="/discuss/Topic?id=$ic['id']">
+							$ic['title']
 						</a>
 					</span>
-					<span class="reply_count">37</span>
+					<span class="reply_count">$ic['COUNT(count_dr.id)']</span>
 					<span class="last_reply">
-						<span class="time">12:11</span>
-						<span class="user">刘项2</span>
+						$if ir['last_dr.id'] is None:
+							<span class="time">-</span>
+							<span class="user"></span>
+						$else:
+							<span class="time">$v['util'].funs.timeStamp2Str(ir['last_dr.ctime'])</span>
+							<span class="user">$ir['ui.nickname']</span>
 					</span>
 				</div>
 		</div>

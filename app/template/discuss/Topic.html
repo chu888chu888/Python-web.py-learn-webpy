@@ -25,6 +25,7 @@ var topic_id = $v['topicInfo']['id'];
 			</div>
 			<div class="common_layout_column floor_right_column">
 				<div class="floor_text">$v['topicInfo']['text']</div>
+				<div class="float_time">$v['util'].funs.timeStamp2Str(v['topicInfo']['ctime'])</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -40,6 +41,7 @@ var topic_id = $v['topicInfo']['id'];
 				</div>
 				<div class="common_layout_column floor_right_column">
 					<div class="floor_text">$reply['text']</div>
+					<div class="float_time">$v['util'].funs.timeStamp2Str(reply['ctime'])</div>
 				</div>
 				<div class="clear"></div>
 			</div>

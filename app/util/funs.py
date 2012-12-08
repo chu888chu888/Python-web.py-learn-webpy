@@ -8,4 +8,4 @@ def isInt(s):
 	return s.isdigit()
 
 def timeStamp2Str(t):
-	time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(t))
+	return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(t))

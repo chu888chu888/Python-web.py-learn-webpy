@@ -47,3 +47,5 @@ class Topic(FrameController):
 			.select()
 		
 		self.setVariable('aReplyIter',aReplyIter)
+		
+		self.setVariable('util',util)

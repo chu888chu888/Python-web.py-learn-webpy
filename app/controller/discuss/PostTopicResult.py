@@ -38,7 +38,7 @@ class PostTopicResult(JsonController):
 		if pnum > 0 :
 			aPnumModel = model.Model.Model('problem_num')
 			aIter = aPnumModel.select(dict(pnum=pnum))
-		
+			
 			pid = -1
 			for i in aIter:
 				pid = i['pid']
@@ -53,7 +53,7 @@ class PostTopicResult(JsonController):
 			pid = pid,
 			uid = uid,
 			ctime = int( time.time() ),
-			rtime = int( time.time() ),
+			last_rid = -1,
 			title = title,
 			text = text
 		))

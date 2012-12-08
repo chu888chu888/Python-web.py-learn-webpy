@@ -17,7 +17,7 @@ topic.sendReply = function(){
 	}
 	var data = {
 		tid: topic_id,
-		rid: topic.reply_id,
+		reply_to_id: topic.reply_id,
 		text: c.value
 	}
 	jQuery.post(
