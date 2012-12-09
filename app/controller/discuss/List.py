@@ -32,6 +32,7 @@ class List(FrameController):
 			.group('dt.id') \
 			.field('COUNT(count_dr.id)') \
 			.reflectField(['dt','pn','topic_ui','last_dr','last_dr_ui']) \
+			.order('CASE WHEN last_dr.id is NULL THEN dt.ctime ELSE last_dr.ctime END DESC') \
 			.select()
 		
 		self.setVariable('iter',aTopicIter)

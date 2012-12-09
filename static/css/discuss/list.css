@@ -7,7 +7,10 @@
 	width: 100px;
 }
 .discuss_list .list_container .title{
-	width: 300px;
+	width: 200px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .discuss_list .list_container .reply_count{
 	width: 50px;

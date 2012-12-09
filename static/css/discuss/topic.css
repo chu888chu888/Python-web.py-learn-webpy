@@ -45,3 +45,13 @@
 	overflow-y: auto;
 	word-wrap:break-word;
 }
+.discuss_topic .building .floor .floor_right_column{
+	position: relative;
+	width: 600px;
+	height: 130px;
+}
+.discuss_topic .building .floor .floor_time{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
