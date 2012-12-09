@@ -20,30 +20,20 @@ class List(FrameController):
 		
 		self.setVariable('pnum',pnum)
 		
-		aDiscussModel = model.LinkedModel('discuss_topic')
-		aIter = aDiscussModel \
+		aTopicModel = model.LinkedModel('discuss_topic')
+		aTopicIter = aTopicModel \
 			.alias('dt') \
-			.join('userinfo','ui','dt.uid = ui.uid') \
 			.join('problem_num','pn','dt.pid = pn.pid') \
+			.join('userinfo','topic_ui','dt.uid = topic_ui.uid') \
+			.join('discuss_reply','last_dr','last_dr.tid = dt.id AND last_dr.id = dt.last_rid') \
+			.join('userinfo','last_dr_ui','last_dr.uid = last_dr_ui.uid') \
 			.join('discuss_reply','count_dr','count_dr.tid = dt.id') \
 			.where(where) \
-			.group('count_dr.tid') \
+			.group('dt.id') \
 			.field('COUNT(count_dr.id)') \
-			.reflectField(['discuss_topic','userinfo','problem_num','discuss_reply']) \
+			.reflectField(['dt','pn','topic_ui','last_dr','last_dr_ui']) \
 			.select()
 		
-		self.setVariable('iter',aIter)
-		
-		aRIter = aDiscussModel \
-			.alias('dt') \
-			.join('problem_num','pn','dt.pid = pn.pid') \
-			.join('discuss_reply','last_dr','last_dr.tid = dt.id AND last_dr.id = dt.last_rid') \
-			.join('userinfo','ui','last_dr.uid = ui.uid') \
-			.where(where) \
-			.select()
-		
-		self.setVariable('riter',aRIter)
+		self.setVariable('iter',aTopicIter)
 		
 		self.setVariable('util',util)
-		
-		self.setVariable('zip',zip)

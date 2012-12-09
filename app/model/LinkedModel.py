@@ -23,7 +23,7 @@ class LinkedModel(object):
 		True : 强制反射所有表
 		False : 强制不反射任何表
 		None/'auto' : 如果有field参数，则不反射；如果没有field参数，则反射
-		list() : 仅反射列表中指定的表，表名必须使用全名
+		list() : 仅反射列表中指定的表，表名必须使用alias name
 		
 		默认为None
 		'''
@@ -145,23 +145,23 @@ class LinkedModel(object):
 		
 		return columnList
 	
-	def __getTableAliasMap(self):
-		tableAliasMap = dict()
+	def __getTableAliasList(self):
+		tableAliasList = list()
 		aliasData = self.__getLinkedData('alias')
 		if aliasData:
-			tableAliasMap[ self.__tableName ] = aliasData
+			tableAliasList.append( (self.__tableName , aliasData) )
 		else:
-			tableAliasMap[ self.__tableName ] = self.__tableName
+			tableAliasList.append( (self.__tableName , self.__tableName) )
 		
 		joinData = self.__getLinkedData('join')
 		if joinData:
 			for join in joinData:
 				if join['alias']:
-					tableAliasMap[ join['jointable'] ] = join['alias']
+					tableAliasList.append( (join['jointable'] , join['alias'] ) )
 				else:
-					tableAliasMap[ join['jointable'] ] = join['jointable']
+					tableAliasList.append( (join['jointable'] , join['jointable'] ) )
 				
-		return tableAliasMap
+		return tableAliasList
 		
 	def __buildFieldString(self):
 		reflectFieldData = self.__getLinkedData('reflectField')
@@ -205,37 +205,30 @@ class LinkedModel(object):
 			fieldStringPartedList.append(fieldStringParted)
 		return fieldStringPartedList
 		
-	def __buildFieldListByColumn(self,tableNameList=None):
-		# table and column
-		if tableNameList is None:
-			tableNameList = self.__getTableNameList()
-		columnNameListMap = dict()
-		for tableName in tableNameList:
-			columnNameListMap[ tableName ] = self.__getColumnList(tableName)
-			
+	def __buildFieldListByColumn(self,tableAliasList=None):
 		# table alias
-		tableAliasMap = self.__getTableAliasMap()
+		AllTableAliasList = self.__getTableAliasList()
 		
-		# fieldString
+		# build field
 		fieldStringPartedList = list()
-		for tableName,columnNameList in columnNameListMap.iteritems():
-			tableAlias = tableAliasMap[ tableName ]
-			for columnName in columnNameList:
-				columnAlias = columnName
-				if tableName == self.__tableName :
-					fieldStringParted = '`%s`.`%s`'%(
-						tableAliasMap[ self.__tableName ],
-						columnName
-					)
-				else:
-					fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
-						tableAlias,
-						columnName,
-						tableAlias,
-						columnAlias
-					)
-				
-				fieldStringPartedList.append( fieldStringParted )
+		for tableName , aliasName in AllTableAliasList:
+			if tableAliasList is None or aliasName in tableAliasList:
+				for columnName in self.__getColumnList(tableName):
+					if tableName == self.__tableName :
+						fieldStringParted = '`%s`.`%s`'%(
+							aliasName,
+							columnName
+						)
+					else:
+						fieldStringParted = '`%s`.`%s` as `%s.%s`'%(
+							aliasName,
+							columnName,
+							aliasName,
+							columnName
+						)
+					
+					fieldStringPartedList.append( fieldStringParted )
+		
 		return fieldStringPartedList
 		
 	def __buildTableString(self):
