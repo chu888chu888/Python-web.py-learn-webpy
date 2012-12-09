@@ -1,3 +1,4 @@
 *.pyc
 privatedata
 static/shjs-0.6
+static/userupload
