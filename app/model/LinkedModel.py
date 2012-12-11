@@ -4,6 +4,7 @@ import db.DbCreator
 import hashlib
 
 class LinkedModel(object):
+	__cache = {}
 	def __init__(self,sTableName):
 		self.__tableName = sTableName
 		self.__db =db.DbCreator.DbCreator.instance()
@@ -137,13 +138,19 @@ class LinkedModel(object):
 		return tableNameList
 	
 	def __getColumnList(self,tableName):
-		aIter = self.__db.query("SHOW COLUMNS FROM `%s`"%tableName)
-		columnList = list()
+		if not 'showColumns' in self.__cache:
+			self.__cache['showColumns'] = dict()
 		
-		for i in aIter:
-			columnList.append(i['Field'])
+		if not tableName in self.__cache['showColumns']:
+			aIter = self.__db.query("SHOW COLUMNS FROM `%s`"%tableName)
+			columnList = list()
 		
-		return columnList
+			for i in aIter:
+				columnList.append(i['Field'])
+			
+			self.__cache['showColumns'][tableName] = columnList
+		
+		return self.__cache['showColumns'][tableName]
 	
 	def __getTableAliasList(self):
 		tableAliasList = list()
