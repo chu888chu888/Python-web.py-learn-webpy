@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from controller.base.FrameController import FrameController
 import web
 import time
@@ -8,13 +10,13 @@ import os
 class AddProblemResult(FrameController):
 	s_config = {
 		'title':u'添加题目结果',
-		'permission':'editProblem',
 	}
 	def process(self):
 		i = web.input()
 		
 		pid = self.addProblem( i )
 		self.addProblemData(pid,i)
+		self.sortProblemNum(pid)
 		
 	def addProblem(self, data ):
 		insertData = dict()
@@ -66,3 +68,9 @@ class AddProblemResult(FrameController):
 				fout = open( filepath ,'w')
 				fout.write( data[key].file.read() )
 				fout.close()
+		
+	def sortProblemNum(self,pid):
+		aProblemNumModel = model.Model.Model('problem_num')
+		aProblemNumModel.insert({
+			'pid':pid
+		})

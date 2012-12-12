@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from controller.base.FrameController import FrameController
-import model
 import web
 
 class PostTopic(FrameController):

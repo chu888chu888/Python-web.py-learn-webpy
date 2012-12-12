@@ -21,21 +21,20 @@ class ProblemList(FrameController):
 		self.setVariable('currentPage',nPage)
 		
 		# problem list
-		aProblemModel = model.Model.Model('problem')
-		aProblemIter = aProblemModel.query(
-			'select * from problem_num as pn left join problem as pr on pn.pid = pr.pid LIMIT %s , %s'
-			%(
-				nPage * nPerPage,
-				nPerPage
-			)
-		)
+		aProblemModel = model.LinkedModel('problem')
+		aProblemIter = aProblemModel \
+			.alias('pr') \
+			.join('problem_num','pn','pn.pid = pr.pid') \
+			.join('userinfo','ui','pr.authorid=ui.uid') \
+			.select()
 		self.setVariable('aProblemIter',aProblemIter)
 		
 		# problem count
-		aProblemCount = aProblemModel.select(what='count(*)')
-		count = 0
-		for c in aProblemCount:
-			count = c['count(*)']
+		count = aProblemModel \
+			.alias('pr') \
+			.join('problem_num','pn','pn.pid = pr.pid') \
+			.join('userinfo','ui','pr.authorid=ui.uid') \
+			.count()
 		
 		# page count
 		pageCount = ( count + nPerPage - 1 ) / nPerPage

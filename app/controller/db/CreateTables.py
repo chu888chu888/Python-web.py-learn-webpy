@@ -38,7 +38,7 @@ class CreateTables(WebPageController):
 			PRIMARY KEY (`pid`)
 			)ENGINE=MyISAM DEFAULT CHARSET=utf8''')
 		self.m_db.query('''CREATE TABLE IF NOT EXISTS `problem_num`(
-			`pnum` int(10) NOT NULL COMMENT '题号',
+			`pnum` int(10) NOT NULL AUTO_INCREMENT COMMENT '题号',
 			`pid` int(10) NOT NULL COMMENT '题目真实id',
 			PRIMARY KEY (`pnum`)
 			)''')

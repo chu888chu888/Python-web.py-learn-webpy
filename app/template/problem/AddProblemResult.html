@@ -1,1 +1,15 @@
-$def with(varDict)
+$def with(v)
+
+$v['res'].add('jquery')
+$v['res'].add('jdmd_widget')
+$v['res'].add('jdmd_widget','css')
+
+<div class="user_loginresult">
+	<div class="common_page_title common_center_block">
+		<div class="common_success">添加成功</div>
+	</div>
+	<div class="redirect_block">
+		<span class="jdmd_redirect" value="3" redirect="/problem/ProblemList">3</span>
+		秒钟后跳转至<a href="/problem/ProblemList">/problem/ProblemList</a>
+	</div>
+</div>
