@@ -22,5 +22,5 @@ class PostTopic(FrameController):
 		if hasattr(s,'userinfo'):
 			uid = s['userinfo']['uid']
 		if uid < 0:
-			self.permissionDenied('请先登录')
+			self.permissionDenied('请先登录',True)
 			return

@@ -43,11 +43,13 @@ class Controller(object):
 	def process(self):
 		pass
 		
-	def permissionDenied(self,msg=None):
+	def permissionDenied(self,msg=None,showLogin=False):
 		self.m_path = 'PermissionDenied'
 		self.__status = 'permission denied'
 		if msg:
 			self.setVariable('msg',msg)
+		
+		self.setVariable('showLogin',showLogin)
 		
 	def Error(self,msg=None):
 		self.m_path = 'Error'

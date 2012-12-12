@@ -10,4 +10,6 @@ $varDict['res'].add('PermissionDenied','css')
 		$else:
 			权限不足
 	</div>
+	$if varDict['showLogin']:
+		<a href='/user/Login?redirect=$varDict['urlquote']'>点此登录</a>
 </div>
