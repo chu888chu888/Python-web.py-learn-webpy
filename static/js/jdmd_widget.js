@@ -69,6 +69,14 @@ jdmd_widget.validate = function(o){
 				rtn.msg += '内容的长度不得超过`'+vil[1]+'`;';
 			}
 			break;
+		case 'userdef':
+			var fun = eval( vil[1] );
+			var validate_rtn = fun( o,val ,vil);
+			if( false == validate_rtn.result ){
+				rtn.result = false;
+				rtn.msg += validate_rtn.msg+';';
+			}
+			break;
 		default:
 			rtn.result = false;
 			rtn.msg += '未知验证:`'+v+'`;';

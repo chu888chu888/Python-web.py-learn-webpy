@@ -21,3 +21,12 @@
 .common_failed{
 	color: red;
 }
+.common_hint{
+	font-size: 16px;
+	vertical-align: top;
+	display: inline-block;
+	width: 80px;
+}
+.common_content{
+	display: inline-block;
+}

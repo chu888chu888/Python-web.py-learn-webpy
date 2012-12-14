@@ -41,7 +41,7 @@ class CreateTables(WebPageController):
 			`pnum` int(10) NOT NULL AUTO_INCREMENT COMMENT '题号',
 			`pid` int(10) NOT NULL COMMENT '题目真实id',
 			PRIMARY KEY (`pnum`)
-			)''')
+			)AUTO_INCREMENT=1000''')
 		self.m_db.query('''CREATE TABLE IF NOT EXISTS `permission`(
 			`id` int(10) NOT NULL AUTO_INCREMENT,
 			`uid` int(10) NOT NULL COMMENT '用户id',
