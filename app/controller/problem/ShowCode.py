@@ -4,6 +4,7 @@ from controller.base.FrameController import FrameController
 import model
 import time
 import web
+import system.session
 
 class ShowCode(FrameController):
 	s_config = {
@@ -42,7 +43,7 @@ class ShowCode(FrameController):
 			return
 			
 		uid = -1
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'userinfo'):
 			uid = s['userinfo']['uid']
 		if not self.checkPermitInSession('showAllCode') \

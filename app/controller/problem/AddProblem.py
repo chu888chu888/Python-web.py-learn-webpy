@@ -2,6 +2,7 @@
 
 from controller.base.FrameController import FrameController
 import web
+import system.session
 
 class AddProblem(FrameController):
 	s_config = {
@@ -9,7 +10,7 @@ class AddProblem(FrameController):
 	}
 	def process(self):
 		uid = -1
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'userinfo'):
 			uid = s['userinfo']['uid']
 		if uid < 0:

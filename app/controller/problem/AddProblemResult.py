@@ -6,6 +6,7 @@ import time
 import model
 import re
 import os
+import system.session
 
 class AddProblemResult(FrameController):
 	s_config = {
@@ -36,7 +37,7 @@ class AddProblemResult(FrameController):
 		
 		insertData['addtime'] = int( time.time() )
 		
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'uid'):
 			insertData['authorid'] = s['uid']
 		else:

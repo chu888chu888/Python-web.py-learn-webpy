@@ -2,6 +2,7 @@
 
 from controller.base.FrameController import FrameController
 import web
+import system.session
 
 class PostTopic(FrameController):
 	s_config = {
@@ -17,7 +18,7 @@ class PostTopic(FrameController):
 		self.setVariable('pnum',pnum)
 		
 		uid = -1
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'userinfo'):
 			uid = s['userinfo']['uid']
 		if uid < 0:

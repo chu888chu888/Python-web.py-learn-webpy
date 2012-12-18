@@ -2,6 +2,7 @@
 from controller.base.FrameController import FrameController
 import web
 import model.user.UserLogin
+import system.session
 
 class LoginResult(FrameController):
 	def process(self):
@@ -53,7 +54,7 @@ class LoginResult(FrameController):
 		
 		# session
 		if loginResult:
-			s = web.config._session
+			s = system.session.Session.singleton()
 			s['uid'] = uid
 			
 			aPermissionModel = model.Model.Model('permission')

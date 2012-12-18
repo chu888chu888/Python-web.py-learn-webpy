@@ -2,10 +2,11 @@
 
 from controller.base.FrameController import FrameController
 import web
+import system.session
 
 class Logout(FrameController):
 	def process(self):
-		s = web.config._session
+		s = system.session.Session.singleton()
 		s.kill()
 		
 		i = web.input()

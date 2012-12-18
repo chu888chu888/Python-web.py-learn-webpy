@@ -4,6 +4,7 @@ from controller.base.Controller import Controller
 import web
 import model
 import time
+import system.session
 
 class JudgeResult(Controller):
 	s_config = {
@@ -13,7 +14,7 @@ class JudgeResult(Controller):
 	def process(self):
 		i = web.input()
 		
-		s = web.config._session
+		s = system.session.Session.singleton()
 		judgeResultModel = model.Model.Model('judge_result')
 		jrid = judgeResultModel.insert( dict(
 			sid = int(i['sid']),

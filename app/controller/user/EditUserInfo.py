@@ -5,6 +5,7 @@ import web
 import model
 import os
 import hashlib
+import system.session
 
 class EditUserInfo(FrameController):
 	s_config = {
@@ -12,7 +13,7 @@ class EditUserInfo(FrameController):
 	}
 	def process(self):
 		uid = -1
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if 'userinfo' in s:
 			uid = s['userinfo']['uid']
 		if uid < 0:

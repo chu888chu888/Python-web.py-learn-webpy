@@ -5,6 +5,7 @@ import web
 import model
 import time
 import setting.Setting
+import system.session
 
 class SubmitResult(FrameController):
 	s_config = {
@@ -25,7 +26,7 @@ class SubmitResult(FrameController):
 				message = '代码长度不得超过%d'%code_maxlength
 				break
 			
-			s = web.config._session
+			s = system.session.Session.singleton()
 			
 			data=dict(
 				pid=int(i['pid']),

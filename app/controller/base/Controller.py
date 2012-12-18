@@ -4,6 +4,7 @@ import PathInvalid
 import view.View
 import web
 import json
+import system.session
 
 class Controller(object):
 	s_config = {
@@ -108,7 +109,7 @@ class Controller(object):
 		return True
 		
 	def checkPermitInSession(self,permission):
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'permissionList'):
 			permissionList = s['permissionList']
 			if permission in permissionList:

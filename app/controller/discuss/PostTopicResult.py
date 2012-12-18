@@ -4,6 +4,7 @@ import web
 import model
 import time
 import util.funs
+import system.session
 
 class PostTopicResult(JsonController):
 	def process(self):
@@ -28,7 +29,7 @@ class PostTopicResult(JsonController):
 			text = i['text']
 		
 		uid = -1
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'userinfo'):
 			uid = s['userinfo']['uid']
 		if uid < 0:

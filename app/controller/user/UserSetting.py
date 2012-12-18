@@ -2,6 +2,7 @@ from controller.base.JsonController import JsonController
 
 import web
 import model
+import system.session
 
 class UserSetting(JsonController):
 	def process(self):
@@ -16,7 +17,7 @@ class UserSetting(JsonController):
 			self.setVariable('msg','param error')
 			return
 			
-		s = web.config._session
+		s = system.session.Session.singleton()
 		if hasattr(s,'uid'):
 			condition['uid'] = s['uid']
 			self.setVariable('uid',s['uid'])

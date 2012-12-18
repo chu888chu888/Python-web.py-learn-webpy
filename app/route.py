@@ -1,4 +1,4 @@
-import web,os,sys
+import os,sys
 
 if sys.getdefaultencoding() != 'utf-8':
     reload(sys)

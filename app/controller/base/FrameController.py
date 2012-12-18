@@ -4,6 +4,7 @@ import WebPageController
 import view.View
 import web
 import model.Model
+import system.session
 
 class FrameController(WebPageController.WebPageController):
 	def __init__(self):
@@ -28,7 +29,7 @@ class FrameController(WebPageController.WebPageController):
 		
 	def ppUser(self):
 		# session
-		s = web.config._session
+		s = system.session.Session.singleton()
 		uid = -1
 		if hasattr(s,'uid'):
 			uid = s['uid']
