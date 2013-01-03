@@ -52,11 +52,6 @@ class AddProblemResult(FrameController):
 		defaultDataMap = dict()
 		
 		reg = re.compile('rundata_(out|in)data_upload_[0-9]+')
-		for key in data:
-			if reg.match( key ):
-				defaultDataMap[ key ] = dict()
-		
-		data = web.input( ** defaultDataMap )
 		
 		dirpath = 'privatedata/rundata/%d/'%pid
 		try:
@@ -67,7 +62,7 @@ class AddProblemResult(FrameController):
 			if reg.match( key ):
 				filepath = dirpath + key + '.dat'
 				fout = open( filepath ,'w')
-				fout.write( data[key].file.read() )
+				fout.write( data[key] )
 				fout.close()
 		
 	def sortProblemNum(self,pid):
